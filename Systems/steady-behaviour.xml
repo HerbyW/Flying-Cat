@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+    Usable with FlightGear 
+    HerbyW 2016
+
+-->
+<system name="behaviour">
+ 
+    <channel name="on-ground">
+        <switch name="systems/behaviour/steady-onground">
+            <default value="0"/>
+            <test  logic="AND" value="1">
+               fcs/mooring2-cmd-norm == 1
+               position/ground-altitude lt 10
+               position/ground-altitude gt 5
+            </test>
+        </switch>
+    
+    
+    <pure_gain name="gear-norm">
+	      <input>systems/behaviour/steady-onground</input>
+	      <gain>1.0</gain>
+	      <output>gear/gear-cmd-norm</output>
+	    </pure_gain>
+	</channel>    
+
+</system>

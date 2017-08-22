@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<PropertyList>
+
+  <fx>
+
+  <!-- Burner-->
+    <burner>
+      <name>burner</name>
+      <mode>looped</mode>
+      <path>Aircraft/Flying-Cat/Sounds/flame.wav</path>
+       <condition>       
+         <property>sim/multiplay/generic/float[3]</property>         
+        </condition>      
+      <volume>
+        <offset>1</offset>
+      </volume>
+      <reference-dist>10</reference-dist>
+      <max-dist>2500</max-dist>
+    </burner>
+    
+    <!-- Turn Valves-->
+    <Tvalve>
+      <name>Tvalve</name>
+      <mode>looped</mode>
+      <path>Aircraft/Flying-Cat/Sounds/valve.wav</path>
+       <condition>
+	 <or>
+          <property>sim/multiplay/generic/int[2]</property>
+	  <property>sim/multiplay/generic/int[3]</property>  
+	 </or>
+        </condition>      
+      <volume>
+        <offset>-0.3</offset>
+      </volume>
+      <reference-dist>10</reference-dist>
+      <max-dist>2500</max-dist>
+    </Tvalve>
+    
+    <!-- Hot Air Ballonet Valve-->
+    <HAvalve>
+      <name>HAvalve</name>
+      <mode>looped</mode>
+      <path>Aircraft/Flying-Cat/Sounds/valve.wav</path>
+       <condition>
+          <property>sim/multiplay/generic/int[4]</property>  
+        </condition>      
+      <volume>
+        <offset>0.2</offset>
+      </volume>
+      <pitch> 
+        <property>sim/multiplay/generic/int[4]</property>
+        <factor> 1.6 </factor>
+      </pitch>
+      <reference-dist>10</reference-dist>
+      <max-dist>2500</max-dist>
+    </HAvalve>
+    
+    <!-- Rip Valve-->
+    <Ripvalve>
+      <name>Ripvalve</name>
+      <mode>looped</mode>
+      <path>Aircraft/Flying-Cat/Sounds/valve.wav</path>
+       <condition>
+          <property>sim/multiplay/generic/int[6]</property>  
+        </condition>      
+      <volume>
+        <offset>1</offset>
+      </volume>
+      <pitch> 
+        <offset>-0.85</offset>
+      </pitch>
+      <reference-dist>10</reference-dist>
+      <max-dist>2500</max-dist>
+    </Ripvalve>
+    
+    <!-- sandbags-->
+    <sandbags>
+      <name>sandbags</name>
+      <mode>looped</mode>
+      <path>Aircraft/Flying-Cat/Sounds/schleifen.wav</path>
+      <condition>
+	<and>
+	  <equals>
+	    <property>sim/multiplay/generic/float[7]</property>
+	    <value>2</value>
+	  </equals>
+	  <less-than>
+	    <property>sim/multiplay/generic/float[5]</property>
+	    <value>80.5</value>
+	  </less-than>
+	</and>
+      </condition>     
+      <volume>
+	<property>sim/multiplay/generic/float[8]</property>
+	<factor> 0.1 </factor>
+      </volume>
+      <reference-dist>10</reference-dist>
+      <max-dist>2500</max-dist>
+    </sandbags>
+    
+    <!-- Decision Height Warning -->
+    <decision>
+      <name>decision</name>
+      <mode>once</mode>
+      <path>Aircraft/Flying-Cat/Sounds/omi_1.wav</path>
+      <condition>
+        <less-than>
+          <property>/position/ground-altitude</property>
+          <property>/instrumentation/altimeter/decision-height</property>      
+        </less-than>
+      </condition>
+      <volume>
+        <min>0.9</min>
+        <max>0.9</max>
+      </volume>
+      <reference-dist>10</reference-dist>
+      <max-dist>100</max-dist>
+    </decision>
+    
+    <!-- autopilot -->
+    <autopilot1>
+      <name>autopilot1</name>
+      <mode>once</mode>
+      <path>Aircraft/Flying-Cat/Sounds/autopilot.wav</path>
+       <condition> 
+         <property>/autopilot/locks/heading-on</property> 
+        </condition>      
+      <volume>
+        <offset>1</offset>
+      </volume>
+      <reference-dist>10</reference-dist>
+      <max-dist>500</max-dist>
+    </autopilot1>
+    
+    <autopilot2>
+      <name>autopilot2</name>
+      <mode>once</mode>
+      <path>Aircraft/Flying-Cat/Sounds/autopilot.wav</path>
+       <condition> 
+	 <property>/autopilot/locks/parachute-on</property> 
+        </condition>      
+      <volume>
+        <offset>1</offset>
+      </volume>
+      <reference-dist>10</reference-dist>
+      <max-dist>500</max-dist>
+    </autopilot2>
+    
+    <autopilot3>
+      <name>autopilot3</name>
+      <mode>once</mode>
+      <path>Aircraft/Flying-Cat/Sounds/autopilot.wav</path>
+       <condition> 
+	 <property>/autopilot/locks/descend-on</property>
+        </condition>      
+      <volume>
+        <offset>1</offset>
+      </volume>
+      <reference-dist>10</reference-dist>
+      <max-dist>500</max-dist>
+    </autopilot3>
+
+    <autopilot5>
+      <name>autopilot5</name>
+      <mode>once</mode>
+      <path>Aircraft/Flying-Cat/Sounds/autopilot.wav</path>
+       <condition> 
+	 <property>/autopilot/locks/altitude-on</property>
+        </condition>      
+      <volume>
+        <offset>1</offset>
+      </volume>
+      <reference-dist>10</reference-dist>
+      <max-dist>500</max-dist>
+    </autopilot5>
+    
+</fx>
+
+</PropertyList>

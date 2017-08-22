@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+  Scharmorton balloon model for FlightGear.
+  Copyright (C) Herbert Wagner 2016
+  This file is licensed under the GPL license version 2 or later.
+-->
+<PropertyList>
+  
+  <airspeed-indicator>
+    <name>airspeed-indicator</name>
+    <number>0</number>
+    <total-pressure>/systems/pitot/total-pressure-inhg</total-pressure>
+    <static-pressure>/systems/static/pressure-inhg</static-pressure>
+  </airspeed-indicator>
+  
+  <altimeter>
+    <name>altimeter</name>
+    <number>0</number>
+    <static-pressure>/systems/static/pressure-inhg</static-pressure>
+  </altimeter>
+  
+  <attitude-indicator>
+    <name>attitude-indicator</name>
+    <number>0</number>
+    <suction>/systems/vacuum/suction-inhg</suction>
+  </attitude-indicator>
+  
+  <vertical-speed-indicator>
+    <name>vertical-speed-indicator</name>
+    <number>0</number>
+    <static-pressure>/systems/static/pressure-inhg</static-pressure>
+  </vertical-speed-indicator>
+  
+  <clock>
+    <name>clock</name>
+    <number>0</number>
+  </clock> 
+  
+  <comm-radio>
+    <name>comm</name>
+    <number>0</number>
+  </comm-radio>
+  
+</PropertyList>

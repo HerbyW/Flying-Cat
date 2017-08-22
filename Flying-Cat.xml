@@ -1,0 +1,791 @@
+<?xml version="1.0"?>
+<!--
+  Flying-Cat Hot Air Balloon flight model for JSBSim.
+
+  Copyright (C) Herbert Wagner 2016
+-->
+
+<?xml-stylesheet type="text/xsl" href="http://jsbsim.sourceforge.net/JSBSim.xsl"?>
+<fdm_config name="Flying-Cat" version="2.0" release="ALPHA"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="http://jsbsim.sourceforge.net/JSBSim.xsd">
+
+
+ <!--
+ ==== Metrics ===============================================================
+ -->
+ <metrics>
+  <documentation>
+   NOTE: The origo of the structural frame coordinate system is in the center
+         of the bottom of the basket. changed!
+	 x/y/z = back/right/up
+  </documentation>
+
+  <wingarea unit="M2"> 126.0 </wingarea> <!--  Must be large to avoid  -->
+  <wingspan unit="M">    6.0 </wingspan> <!--  numerical problems.     -->
+  <chord unit="FT"> 0 </chord>
+  <htailarea unit="FT2"> 0 </htailarea>
+  <htailarm unit="FT"> 0 </htailarm>
+  <vtailarea unit="FT2"> 0 </vtailarea>
+  <vtailarm unit="FT"> 0 </vtailarm>
+  <location name="AERORP" unit="M">
+   <x> 0 </x>
+   <y> 0 </y>
+   <z> 16.2 </z>
+  </location>
+  <location name="EYEPOINT" unit="M">
+   <x> 0 </x>
+   <y> 0 </y>
+   <z> 0.975 </z>
+  </location>
+  <location name="VRP" unit="M">
+   <x> 0 </x>
+   <y> 0 </y>
+   <z> 0.05 </z>
+  </location>
+ </metrics>
+
+ <!--
+ ==== Mass balance ==========================================================
+ -->
+ <mass_balance>
+
+  <documentation> not right
+    Masses in KG gesamt 10000 kg
+
+    Envelope        1620
+    Net              150              ---1770
+    
+    Gondel           920
+    Drag rope         98
+    Instruments      350
+    Ausrüstung       500              ---1868
+    
+    34*180 KG GasContainer            ---6100
+    
+    Load ring         80
+    Burner           150              ---230
+    
+    Valve             20
+    Valve cord        20              ---40
+    
+    
+    
+    
+  </documentation>
+  <documentation>
+    Rough model to estimate CG and inertia tensor.
+
+    % Envelope + net (Thin sphere)
+    m_e = 147.87  % KG
+    r   = 6.185   % M
+
+    % Basket + Drag rope + Instruments + Com. gear (Point mass)
+    m_b = 64.864  % KG
+
+    % Load ring (Point mass)
+    m_lr = 9.072  % KG
+
+    % Top valve + cord (Point mass)
+    m_v = 8.165   % KG
+    
+    % CG for envelope: (0, 0, 15.545)
+    % Inertia tensor for envelope. Since we take CG_e as CG we are done. 
+    Ixx = 2/3 * m_e * r^2         2/3 * 1770 * 13*13
+    Iyy = 2/3 * m_e * r^2
+    Izz = 2/3 * m_e * r^2
+    Ixy = Ixz = Iyz = 0
+  </documentation>
+
+  <ixx unit="KG*M2"> 15000000 </ixx>
+  <iyy unit="KG*M2"> 15000000 </iyy>
+  <izz unit="KG*M2"> 15000000 </izz>
+  <ixy unit="KG*M2">   -0   </ixy>
+  <ixz unit="KG*M2">   -0   </ixz>
+  <iyz unit="KG*M2">   -0   </iyz>
+  <emptywt unit="KG"> 407 </emptywt>
+  <location name="CG" unit="M">
+   <x>  0     </x>
+   <y>  0     </y>
+   <z> 3.0 </z>
+  </location>
+
+  <pointmass name="Ballast">
+   <location name="POINTMASS" unit="M">
+    <x> 0.0 </x>
+    <y> 0.0 </y>
+    <z> 1.0 </z>
+   </location>
+   <weight unit="KG"> 610.0 </weight>
+  </pointmass>
+  
+  <pointmass name="Pilot">
+   <weight unit="KG"> 100.0 </weight>
+   <location name="POINTMASS" unit="M">
+    <x> -0.5 </x>
+    <y>  0.5 </y>
+    <z>  1.0 </z>
+   </location>
+  </pointmass>
+  
+  <pointmass name="Propane Burner Fuel">
+   <weight unit="KG"> 180.0 </weight>
+   <location name="POINTMASS" unit="M">
+    <x> 0.0 </x>
+    <y>  0.0 </y>
+    <z>  1.2 </z>
+   </location>
+  </pointmass>
+
+  <pointmass name="Basket">
+   <weight unit="KG"> 186.0 </weight>
+   <location name="POINTMASS" unit="M">
+    <x> 0    </x>
+    <y> 0    </y>
+    <z> 1.0 </z>
+   </location>
+  </pointmass>
+  
+  <pointmass name="Load ring">
+   <weight unit="KG"> 60.0 </weight>
+   <location name="POINTMASS" unit="M">
+    <x> 0     </x>
+    <y> 0     </y>
+    <z> 2.9 </z>
+   </location>
+  </pointmass>
+  <pointmass name="Top valve">
+   <weight unit="KG"> 10.0 </weight>
+   <location name="POINTMASS" unit="M">
+    <x>  0    </x>
+    <y>  0    </y>
+    <z> 25.5 </z>
+   </location>
+  </pointmass>
+
+ </mass_balance>
+
+ <!--
+ === Gas cell ===============================================================
+ 1. Hot Air Balloon
+ -->
+
+ <buoyant_forces>
+
+  <!-- External environment properties -->
+  <!-- Set from Nasal. -->
+  
+  <property> environment/sun-angle-rad </property>
+
+  <!-- Gas cell constants -->
+
+  <!-- Conductivity [lb / (K ft sec)] (Guess) -->
+  <property value="0.57"> buoyant_forces/heat-coeffs/conductivity </property>
+  <!-- Emissivity [0,1] (Guess) -->
+  <property value="0.05"> buoyant_forces/heat-coeffs/emissivity </property>
+  
+  <property value="0.0"> fcs/blower-valve-cmd-norm </property>
+  
+       <!-- Hot Air Balloon -->
+  <gas_cell type="AIR">
+    
+   <location unit="M">
+    <x> 0 </x>
+    <y> 0 </y>
+    <z> 16.2 </z>
+   </location>
+   <x_radius unit="M"> 9.5 </x_radius>
+   <y_radius unit="M"> 9.5 </y_radius>
+   <z_radius unit="M"> 9.5 </z_radius>
+   <fullness> 0.0 </fullness>   
+   <max_overpressure unit="PA"> 0.0 </max_overpressure>    
+   <valve_coefficient unit="M4*SEC/KG"> 0.15 </valve_coefficient>
+   
+   <heat>
+       
+    <function name="buoyant_forces/gas-cell/dU_conduction">
+     <product>
+      <value> 12207.57 </value>
+      <value> 0.25 </value>
+      <property> buoyant_forces/heat-coeffs/conductivity </property>
+      <difference>  
+	<property> atmosphere/T-R </property>
+        <property> buoyant_forces/gas-cell/temp-R </property>       
+      </difference>
+     </product>
+    </function>
+    
+    <function name="buoyant_forces/gas-cell/dU_radiation">
+     <product>
+      <value> 0.1714e-8 </value>
+      <property> buoyant_forces/heat-coeffs/emissivity </property>
+      <value>   12207.57 </value>
+      <value> 0.50 </value>
+      <difference>
+       <pow>
+        <property> atmosphere/T-R </property>
+        <value> 4.0 </value>
+       </pow>
+       <pow>
+        <property> buoyant_forces/gas-cell/temp-R </property>
+        <value> 4.0 </value>
+       </pow>
+      </difference>
+     </product>
+    </function>    
+    
+    <function name="buoyant_forces/gas-cell/dU_solar_radiation">
+     <product>
+      <value>   7.2330 </value>
+      <value>   12207.57 </value>
+      <value>  130.00 </value>
+      <value>     0.02 </value>
+      <value> 0.50 </value>
+      <property> environment/sun-angle-rad </property>
+      <max>
+       <value> 0.0 </value>
+       <difference>
+        <value> 1.5708 </value>
+        <property> environment/sun-angle-rad </property>
+       </difference>
+      </max>
+     </product>
+    </function>
+    
+     <function name="buoyant_forces/gas-cell/dU_flame">
+     <product>
+      <value> 450000 </value>
+      <property> fcs/flame-valve-cmd-norm </property>
+     </product>
+    </function>
+    
+    <function name="buoyant_forces/gas-cell/dU_air-flow">
+	 <product>
+	   <value> 300 </value>
+	   <property> fcs/blower-valve-cmd-norm</property>
+	 </product>
+    </function> 
+    
+   </heat>
+
+  </gas_cell>
+ 
+ </buoyant_forces>
+
+ <!--
+ === Ground reactions =======================================================
+ -->
+ <ground_reactions>
+
+  <contact type="STRUCTURE" name="BASKET_LOWER_CENTER">
+   <location unit="M">
+    <x>  0.0  </x>
+    <y>  0.0  </y>
+    <z>  -0.07 </z>
+   </location>
+   <static_friction> 5 </static_friction>
+   <dynamic_friction> 5 </dynamic_friction>
+   <rolling_friction> 3.0 </rolling_friction>
+   <spring_coeff unit="N/M"> 24000 </spring_coeff>
+   <damping_coeff type="SQUARE" unit="N/M2/SEC2"> 22000 </damping_coeff>
+  </contact>
+
+  <contact type="STRUCTURE" name="BASKET_LOWER_CORNER_1">
+   <location unit="M">
+    <x> -1.30 </x>
+    <y> -0.65 </y>
+    <z>  -0.07 </z>
+   </location>
+   <static_friction> 5 </static_friction>
+   <dynamic_friction> 5 </dynamic_friction>
+   <rolling_friction> 3.0 </rolling_friction>
+   <spring_coeff unit="N/M"> 24000 </spring_coeff>
+   <damping_coeff type="SQUARE" unit="N/M2/SEC2"> 22000 </damping_coeff>
+  </contact>
+  
+  <contact type="STRUCTURE" name="BASKET_LOWER_CORNER_2">
+   <location unit="M">
+    <x> -1.30 </x>
+    <y>  0.65 </y>
+    <z>  -0.07 </z>
+   </location>
+   <static_friction> 5 </static_friction>
+   <dynamic_friction> 5 </dynamic_friction>
+   <rolling_friction> 3.0 </rolling_friction>
+   <spring_coeff unit="N/M"> 24000 </spring_coeff>
+   <damping_coeff type="SQUARE" unit="N/M2/SEC2"> 22000 </damping_coeff>
+  </contact>
+  
+  <contact type="STRUCTURE" name="BASKET_LOWER_CORNER_3">
+   <location unit="M">
+    <x>  1.30 </x>
+    <y> -0.65 </y>
+    <z>  -0.07 </z>
+   </location>
+   <static_friction> 5 </static_friction>
+   <dynamic_friction> 5 </dynamic_friction>
+   <rolling_friction> 3.0 </rolling_friction>
+   <spring_coeff unit="N/M"> 24000 </spring_coeff>
+   <damping_coeff type="SQUARE" unit="N/M2/SEC2"> 22000 </damping_coeff>
+  </contact>
+  
+  <contact type="STRUCTURE" name="BASKET_LOWER_CORNER_4">
+   <location unit="M">
+    <x> 1.30 </x>
+    <y> 0.65 </y>
+    <z>  -0.07 </z>
+   </location>
+   <static_friction> 5 </static_friction>
+   <dynamic_friction> 5 </dynamic_friction>
+   <rolling_friction> 3.0 </rolling_friction>
+   <spring_coeff unit="N/M"> 24000 </spring_coeff>
+   <damping_coeff type="SQUARE" unit="N/M2/SEC2"> 22000 </damping_coeff>
+  </contact>
+
+  <contact type="STRUCTURE" name="BASKET_UPPER_CORNER_1">
+   <location unit="M">
+    <x> -1.30 </x>
+    <y> -0.72 </y>
+    <z> 2.08 </z>
+   </location>
+   <static_friction> 0.5 </static_friction>
+   <dynamic_friction> 0.5 </dynamic_friction>
+   <rolling_friction> 1.0 </rolling_friction>
+   <spring_coeff unit="N/M"> 22000 </spring_coeff>
+   <damping_coeff type="SQUARE" unit="N/M2/SEC2"> 6600 </damping_coeff>
+  </contact>
+  
+  <contact type="STRUCTURE" name="BASKET_UPPER_CORNER_2">
+   <location unit="M">
+    <x> -1.30 </x>
+    <y> 0.72 </y>
+    <z> 2.08 </z>
+   </location>
+   <static_friction> 0.5 </static_friction>
+   <dynamic_friction> 0.5 </dynamic_friction>
+   <rolling_friction> 1.0 </rolling_friction>
+   <spring_coeff unit="N/M"> 22000 </spring_coeff>
+   <damping_coeff type="SQUARE" unit="N/M2/SEC2"> 6600 </damping_coeff>
+  </contact>
+  
+  <contact type="STRUCTURE" name="BASKET_UPPER_CORNER_3">
+   <location unit="M">
+    <x> 1.30 </x>
+    <y> -0.72 </y>
+    <z> 2.08 </z>
+   </location>
+   <static_friction> 0.5 </static_friction>
+   <dynamic_friction> 0.5 </dynamic_friction>
+   <rolling_friction> 1.0 </rolling_friction>
+   <spring_coeff unit="N/M"> 22000 </spring_coeff>
+   <damping_coeff type="SQUARE" unit="N/M2/SEC2"> 6600 </damping_coeff>
+  </contact>
+  
+  <contact type="STRUCTURE" name="BASKET_UPPER_CORNER_4">
+   <location unit="M">
+    <x> 1.30 </x>
+    <y> 0.72 </y>
+    <z> 2.08 </z>
+   </location>
+   <static_friction> 0.5 </static_friction>
+   <dynamic_friction> 0.5 </dynamic_friction>
+   <rolling_friction> 1.0 </rolling_friction>
+   <spring_coeff unit="N/M"> 22000 </spring_coeff>
+   <damping_coeff type="SQUARE" unit="N/M2/SEC2"> 6600 </damping_coeff>
+  </contact>
+
+  <contact type="STRUCTURE" name="TOP_OF_ENVELOPE">
+   <location unit="M">
+    <x>  0    </x>
+    <y>  0    </y>
+    <z> 55.0 </z>
+   </location>
+   <static_friction> 0.5 </static_friction>
+   <dynamic_friction> 0.5 </dynamic_friction>
+   <rolling_friction> 1.0 </rolling_friction>
+   <spring_coeff unit="N/M"> 22000 </spring_coeff>
+   <damping_coeff type="SQUARE" unit="N/M2/SEC2"> 6600 </damping_coeff>
+  </contact>
+  
+  <contact type="BOGEY" name="fixedrightfront">
+   <location unit="M">
+    <x>  2    </x>
+    <y>  2    </y>
+    <z> -2.0 </z>
+   </location>
+   <static_friction> 5.5 </static_friction>
+   <dynamic_friction> 5.5 </dynamic_friction>
+   <rolling_friction> 5.0 </rolling_friction>
+   <spring_coeff unit="N/M"> 1000 </spring_coeff>
+   <damping_coeff type="SQUARE" unit="N/M2/SEC2"> 700 </damping_coeff>
+   <brake_group>CENTER</brake_group>
+   <retractable>1</retractable>
+  </contact>
+  
+  <contact type="BOGEY" name="fixedleftfront">
+   <location unit="M">
+    <x>  2    </x>
+    <y>  -2    </y>
+    <z> -2.0 </z>
+   </location>
+   <static_friction> 5.5 </static_friction>
+   <dynamic_friction> 5.5 </dynamic_friction>
+   <rolling_friction> 5.0 </rolling_friction>
+   <spring_coeff unit="N/M"> 1000 </spring_coeff>
+   <damping_coeff type="SQUARE" unit="N/M2/SEC2"> 700 </damping_coeff>
+   <brake_group>CENTER</brake_group>
+   <retractable>1</retractable>
+  </contact>
+  
+  <contact type="BOGEY" name="fixedrightback">
+   <location unit="M">
+    <x>  -2    </x>
+    <y>  2    </y>
+    <z> -2.0 </z>
+   </location>
+   <static_friction> 5.5 </static_friction>
+   <dynamic_friction> 5.5 </dynamic_friction>
+   <rolling_friction> 5.0 </rolling_friction>
+   <spring_coeff unit="N/M"> 1000 </spring_coeff>
+   <damping_coeff type="SQUARE" unit="N/M2/SEC2"> 700 </damping_coeff>
+   <brake_group>CENTER</brake_group>
+   <retractable>1</retractable>
+  </contact>
+  
+  <contact type="BOGEY" name="fixedleftback">
+   <location unit="M">
+    <x>  -2    </x>
+    <y>  -2    </y>
+    <z> -2.0 </z>
+   </location>
+   <static_friction> 5.5 </static_friction>
+   <dynamic_friction> 5.5 </dynamic_friction>
+   <rolling_friction> 5.0 </rolling_friction>
+   <spring_coeff unit="N/M"> 1000 </spring_coeff>
+   <damping_coeff type="SQUARE" unit="N/M2/SEC2"> 700 </damping_coeff>
+   <brake_group>CENTER</brake_group>
+   <retractable>1</retractable>
+  </contact>
+
+ </ground_reactions>
+
+ <propulsion/>
+
+ 
+ 
+ <!--
+ === Flight control system ==================================================
+ -->
+ <flight_control name="FGFCS">
+
+  <!-- CHANNELS -->
+  <channel name="Gas">
+
+   <summer name="Gas Valve Sum">
+    <input>fcs/gas-valve-cmd-norm</input>
+    <clipto>
+     <min>0</min>
+     <max>1</max>
+    </clipto>
+   </summer>
+
+   <fcs_function name="Gas Valve Control">
+    <function>
+     <sum>
+      <property>fcs/gas-valve-sum</property>
+      <product>
+       <value>1.0</value>
+       <property>fcs/rip-cmd-norm</property>
+      </product>
+     </sum>
+    </function>
+    <output>buoyant_forces/gas-cell/valve_open</output>
+   </fcs_function>
+  </channel>
+
+  <channel name="Joystick input">
+
+   <pure_gain name="Aileron wrapper L">
+    <input> fcs/aileron-cmd-norm </input>
+    <gain> 1 </gain>
+    <output> fcs/left-aileron-pos-norm </output>
+   </pure_gain>
+   
+   <pure_gain name="Aileron wrapper R">
+    <input> fcs/aileron-cmd-norm </input>
+    <gain> -1 </gain>
+    <output> fcs/right-aileron-pos-norm </output>
+   </pure_gain>
+
+   <pure_gain name="Elevator wrapper">
+    <input> fcs/elevator-cmd-norm </input>
+    <gain> 1 </gain>
+    <output> fcs/elevator-pos-norm </output>
+   </pure_gain>
+
+   <pure_gain name="Rudder wrapper">
+    <input> fcs/rudder-cmd-norm </input>
+    <gain> 1 </gain>
+    <output> fcs/rudder-pos-norm </output>
+   </pure_gain>
+
+  </channel>
+  
+  <channel name="Fixed Standing">
+		    <kinematic name="fcs/gear-control">
+		      <input>gear/gear-cmd-norm</input>
+		      <traverse>
+			<setting>
+			  <position> 0 </position>
+			  <time>     0 </time>
+			</setting>
+			<setting>
+			  <position> 1 </position>
+			  <time>     1 </time>
+			</setting>
+		      </traverse>
+		      <output>gear/gear-pos-norm</output>
+		    </kinematic>
+		    
+		    </channel>
+
+ </flight_control>
+
+ 
+
+ 
+ <!--
+ ==== External reactions ====================================================
+ -->
+
+ <external_reactions>
+
+ <!-- Help variables for mass -->
+   <property value="0.65"> external_reactions/x-const </property>
+   <property value="0.65"> external_reactions/y-const </property>
+   <property value="-2100"> external_reactions/z-const </property><!--0.1 -->
+   <property value="0.0"> fcs/mooring-cmd-norm </property>
+   <property value="0.0"> fcs/mooring2-cmd-norm </property>
+ 
+  <force name="added-mass-bx" frame="BODY">
+   <location unit="M">
+    <x>  0.0 </x>
+    <y>  0.0 </y>
+    <z>  16.2 </z>
+   </location>
+   <direction>
+    <x> 1.0 </x>
+    <y> 0.0 </y>
+    <z> 0.0 </z>
+   </direction>
+  </force>
+  <force name="added-mass-by" frame="BODY">
+   <location unit="M">
+    <x>  0.0 </x>
+    <y>  0.0 </y>
+    <z>  16.2 </z>
+   </location>
+   <direction>
+    <x> 0.0 </x>
+    <y> 1.0 </y>
+    <z> 0.0 </z>
+   </direction>
+  </force>
+  <force name="added-mass-bz" frame="BODY">
+   <location unit="M">
+    <x>  0.0 </x>
+    <y>  0.0 </y>
+    <z>  16.2 </z>
+   </location>
+   <direction>
+    <x> 0.0 </x>
+    <y> 0.0 </y>
+    <z> 1.0 </z>
+   </direction>
+  </force>
+
+  <force name="added-mass-pitch[0]" frame="BODY">
+   <location unit="M">
+    <x>  0.0 </x>
+    <y>  0.0 </y>
+    <z> 16.2 </z>
+   </location>
+   <direction>
+    <x> 1.0 </x>
+    <y> 0.0 </y>
+    <z> 0.0 </z>
+   </direction>
+  </force>
+  <force name="added-mass-pitch[1]" frame="BODY">
+   <location unit="M">
+    <x>  0.0 </x>
+    <y>  0.0 </y>
+    <z>  16.2 </z>
+   </location>
+   <direction>
+    <x> 1.0 </x>
+    <y> 0.0 </y>
+    <z> 0.0 </z>
+   </direction>
+  </force>
+
+  <force name="added-mass-yaw[0]" frame="BODY">
+   <location unit="M">
+    <x>  0.0 </x>
+    <y> -0.30 </y>
+    <z>  0.0 </z>
+   </location>
+   <direction>
+    <x> 1.0 </x>
+    <y> 0.0 </y>
+    <z> 0.0 </z>
+   </direction>
+  </force>
+  <force name="added-mass-yaw[1]" frame="BODY">
+   <location unit="M">
+    <x>  0.0 </x>
+    <y>  0.30 </y>
+    <z>  0.0 </z>
+   </location>
+   <direction>
+    <x> 1.0 </x>
+    <y> 0.0 </y>
+    <z> 0.0 </z>
+   </direction>
+  </force>
+  
+  <force name="mooring" frame="BODY">
+	<location unit="M"><!--Sandsacks -->
+	  <x>0</x>
+	  <y>0 </y>
+	  <z>-10 </z>
+	</location>
+	<direction>
+	  <x>0</x>
+	  <y>0</y>
+	  <z>1</z>
+	</direction>
+  </force>
+  
+  <force name="mooring2" frame="BODY">
+	<location unit="M"><!--Anchor, fixed to ground -->
+	  <x>0</x>
+	  <y>0 </y>
+	  <z>-10 </z>
+	</location>
+	<direction>
+	  <x>0</x>
+	  <y>0</y>
+	  <z>1</z>
+	</direction>
+  </force>
+
+  <force name="turnvalvel" frame="BODY">
+	<location unit="M"><!--Turn Valve left-->
+	  <x>9</x>
+	  <y>9</y>
+	  <z>16</z>
+	</location>
+	<direction>
+	  <x>0</x>
+	  <y>1</y>
+	  <z>0</z>
+	</direction>
+  </force>
+  
+  <force name="turnvalver" frame="BODY">
+	<location unit="M"><!--Turn Valve right-->
+	  <x>9</x>
+	  <y>9</y>
+	  <z>16</z>
+	</location>
+	<direction>
+	  <x>0</x>
+	  <y>-1</y>
+	  <z>0</z>
+	</direction>
+  </force>
+
+ </external_reactions>
+
+ <!--
+ === Aerodynamics ===========================================================
+ -->
+ <system name="constants">
+
+  <!-- Aerodynamic constants. -->
+  <property value="62.34"> aero/constants/length-ft </property>
+  <property value="62.34"> aero/constants/diameter-ft </property>
+  <property value="7772.55"> aero/constants/length-diameter-ft2 </property>
+  <property value="126827.68"> aero/constants/volume-ft3 </property>
+
+  <!-- Added mass constants. -->
+  <property value="-0.20"> aero/constants/added-mass/k-axial </property><!-- -0.50 -->
+  <property value="-0.70"> aero/constants/added-mass/k-traverse </property><!-- -0.50 -->
+  <property value="-0.23"> aero/constants/added-mass/k-rotational </property><!-- -0.0 -->
+  <property value="1.00"> aero/constants/added-mass/tweak-factor </property>
+  <property value="0.00"> position/ground-altitude </property>
+  <property value="0"> fcs/takeoffweight </property>
+
+ </system>
+ 
+ <system file="animation-jsbsim"/>
+ 
+ <system file="airship_added_mass"/>
+ 
+ <system file="steady-behaviour"/>
+
+ <aerodynamics>
+  <!-- Wild guess: D = K A q_inf -->
+  <!-- A = cross sectional area (120.2m^2); -->
+  <!--
+      NOTE: The drag coefficients has been estimated using a virtual
+            wind-tunnel setup in gerris, a fluid dynamics simulator.
+            The viability of this approach is not yet evaluated.
+  -->
+  <axis name="DRAG">
+   <function name="aero/coefficient/CDh">
+    <description>Drag</description>
+    <product>
+     <property>aero/qbar-psf</property>
+     <value> 8300.0 </value>
+     <table>
+      <independentVar lookup="row">aero/alpha-deg</independentVar>
+      <tableData>
+       -135 0.033088
+       -90  0.024652
+       -45  0.033088
+       0    0.020219
+       45   0.067882
+       135  0.067882
+      </tableData>
+     </table>
+    </product>
+   </function>
+  </axis>
+
+  <axis name="ROLL">
+   <function name="aero/coefficient/Clp">
+    <description>Roll_moment_due_to_roll_rate_(roll_damping)</description>
+    <!-- Wild guess: K * basket area * moment arm * "p_inf" --> 
+    <!-- The current version is just a hack to make the balloon stable. -->
+    <product>
+      <value> 0.001 </value>     
+    </product>
+   </function>
+  </axis>
+
+  <axis name="PITCH">
+   <function name="aero/coefficient/Cmq">
+    <description>Pitch_moment_due_to_pitch_rate_(damping)</description>
+    <!-- Wild guess: K * basket area * moment arm * "p_inf" -->
+    <!-- The current version is just a hack to make the balloon stable. -->
+    <product>
+      <value> 0.001 </value>
+    </product>
+   </function>
+  </axis>
+
+ </aerodynamics>
+
+</fdm_config>

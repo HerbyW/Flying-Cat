@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+  Scharmorton balloon model for FlightGear.
+  
+  Copyright (C) Herbert Wagner 2016
+  This file is licensed under the GPL license version 2 or later.
+-->
+<system name="animation">
+  
+  <channel name="Envelope animation">
+    
+    <!-- switches animation/on to 0 if animation is on ground possible, in air it is 1-->
+    
+    <switch name="animation/on">
+      <default value="1"/>
+      <test  logic="AND" value="0">                
+	animation/anchor-sacks  gt  0
+	position/ground-altitude lt 5
+      </test>
+    </switch>
+ 
+ <!--on ground-->
+ <fcs_function name="animation/hull-level">
+   <function>
+     <max>
+       <property>animation/on</property>   
+       <quotient>  
+	 <property>buoyant_forces/gas-cell/volume-ft3</property>
+	 <property>buoyant_forces/gas-cell/max_volume-ft3</property>    
+       </quotient>  
+     </max>    
+   </function>
+   <output>/sim/multiplay/generic/float[0]</output>
+ </fcs_function>
+ 
+  <!--in air-->
+ <fcs_function name="animation/hull">
+   <function>
+     <quotient>  
+       <property>buoyant_forces/gas-cell/volume-ft3</property>
+       <property>buoyant_forces/gas-cell/max_volume-ft3</property>    
+     </quotient>
+   </function>
+   <output>sim/multiplay/generic/float[1]</output>
+ </fcs_function>
+
+    </channel>
+    
+</system>

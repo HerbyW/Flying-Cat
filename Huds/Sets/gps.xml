@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    #########################################################################################
+    Antonov-Aircrafts and SpaceShuttle :: Herbert Wagner November2014-June2015
+    Animations, FDM, Instrumentation, Rembrandt, ALS, Paratroopers, Cargo, Sounds
+    all with full Multiplayer Support.
+    Development is ongoing, see latest version: https://github.com/HerbyW?tab=repositories
+    This file is licenced under the terms of the GNU General Public Licence V3 or later
+    D-Leon: technical assistance
+    Firefly: 3D model improvment
+    Eagel: Liveries
+    Michat, Joe, Miguel, 3m, D-07007 and many others: testing and giving hints for impovements
+    Instruments from; Tu-154b, Il-76D, 707
+    ##########################################################################################
+-->
+
+<PropertyList>
+  
+	<!-- GPS waypoint -->
+	
+	<label>
+	  <width>2</width>
+	  <height>2</height>
+	  <format>GPS OBS:%5s</format>
+	  <halign>left</halign>
+	  <input>
+	    <property>/instrumentation/gps/wp/wp[1]/ID</property>
+	  </input>
+	  
+	  <condition>
+	    <equals>
+	      <property>/instrumentation/gps/mode</property>
+	      <value>obs</value>
+	    </equals>
+	  </condition>
+	</label>
+	
+	<label>
+	  <width>2</width>
+	  <height>2</height>
+	  <x>80</x>
+	  <format>(TO)</format>
+	  <halign>left</halign>
+	  
+	  <condition>
+	    <and>
+	      <equals>
+		<property>/instrumentation/gps/mode</property>
+		<value>obs</value>
+	      </equals>
+	      <not><property>/instrumentation/gps/from-flag</property></not>
+	    </and>
+	  </condition>
+	</label>
+	
+	<label>
+	  <width>2</width>
+	  <height>2</height>
+	  <x>80</x>
+	  <format>(FROM)</format>
+	  <halign>left</halign>
+	  
+	  <condition>
+	    <and>
+	      <equals>
+		<property>/instrumentation/gps/mode</property>
+		<value>obs</value>
+	      </equals>
+	      <property>/instrumentation/gps/from-flag</property>
+	    </and>
+	  </condition>
+	</label>
+	
+	<label>
+	  <width>2</width>
+	  <height>2</height>
+	  <format>GPS DTO:%5s</format>
+	  <halign>left</halign>
+	  <input>
+	    <property>/instrumentation/gps/wp/wp[1]/ID</property>
+	  </input>
+	  
+	  <condition>
+	    <property>/instrumentation/gps/wp/wp[1]/valid</property>
+	    <equals>
+	      <property>/instrumentation/gps/mode</property>
+	      <value>dto</value>
+	    </equals>
+	  </condition>
+	</label>
+	
+	<label>
+	  <width>2</width>
+	  <height>2</height>
+	  <format>GPS LEG:%5s</format>
+	  <halign>left</halign>
+	  <input>
+	    <property>/instrumentation/gps/wp/wp[0]/ID</property>
+	  </input>
+	  
+	  <condition>
+	    <property>/instrumentation/gps/wp/wp[1]/valid</property>
+	    <equals>
+	      <property>/instrumentation/gps/mode</property>
+	      <value>leg</value>
+	    </equals>
+	   </condition>	  
+	  </label>
+	  
+	  <label>
+	    <width>2</width>
+	    <height>2</height>
+	    <x>80</x>
+	    <format>-&gt;%5s</format>
+	    <halign>left</halign>
+	    <input>
+	      <property>/instrumentation/gps/wp/wp[1]/ID</property>
+	    </input>
+	    
+	    <condition>
+	      <property>/instrumentation/gps/wp/wp[1]/valid</property>
+	      <equals>
+		<property>/instrumentation/gps/mode</property>
+		<value>leg</value>
+	      </equals>
+	    </condition>
+	    </label>    
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <y>-10</y>
+	      <format>D: %4.1fnm</format>
+	      <halign>left</halign>
+	      <input>
+		<property>/instrumentation/gps/wp/wp[1]/distance-nm</property>
+	      </input>
+	      <condition>
+		<property>/instrumentation/gps/wp/wp[1]/valid</property>
+	      </condition>
+	    </label>
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>60</x>
+	      <y>-10</y>
+	      <format>TTW:%s</format>
+	      <halign>left</halign>
+	      <input>
+		<property>/instrumentation/gps/wp/wp[1]/TTW</property>
+	      </input>
+	      <condition>
+		<property>/instrumentation/gps/wp/wp[1]/valid</property>
+	      </condition>
+	    </label>
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <y>-20</y>
+	      <format>BRG:%03d</format>
+	      <halign>left</halign>
+	      <input>
+		<property>/instrumentation/gps/wp/wp[1]/bearing-mag-deg</property>
+	      </input>
+	      <condition>
+		<property>/instrumentation/gps/wp/wp[1]/valid</property>
+	      </condition>
+	    </label>
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <y>-20</y>
+	      <x>60</x>
+	      <format>XTK: %2.1fnm</format>
+	      <halign>left</halign>
+	      <input>
+		<property>/instrumentation/gps/wp/wp[1]/course-error-nm</property>
+	      </input>
+	      
+	      <condition>
+		<property>/instrumentation/gps/wp/wp[1]/valid</property>
+		<greater-than>
+		  <expression>
+		    <abs><property>/instrumentation/gps/wp/wp[1]/course-error-nm</property></abs>
+		  </expression>
+		  <value>0.1</value>
+		</greater-than>
+	      </condition>
+	    </label>
+	    
+	    
+	    
+	    <!--Extra Information for Morton Balloon by HerbyW right from window-->
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>540</x>
+	      <y>-300</y>
+	      <format>Outside T-R:....%10.0f</format>
+	      <halign>left</halign>
+	      <input>
+		<property>fdm/jsbsim/atmosphere/T-R</property>
+	      </input>
+	    </label>
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>540</x>
+	      <y>-310</y>
+	      <format>T-R total:.........%10.0f</format>
+	      <halign>left</halign>
+	      <input>
+		<property>fdm/jsbsim/buoyant_forces/gas-cell/temp-R</property>
+	      </input>
+	    </label>
+	    
+	    
+	    <!-- -->
+	    
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>540</x>
+	      <y>-320</y>
+	      <format>GroundElevation:%9.3f..........km</format>
+	      <halign>left</halign>
+	      <input>
+		<property>/position/ground-altitude</property>
+		<factor>0.0003048</factor>
+	      </input>
+	    </label>
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>540</x>
+	      <y>-330</y>
+	      <format>GroundSpeed:...%8.0f.............kts</format>
+	      <halign>left</halign>
+	      <input>
+		<property>/instrumentation/gps/indicated-ground-speed-kt</property>
+	      </input>
+	    </label>
+            
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>540</x>
+	      <y>-340</y>
+	      <format>VerticalSpeed:.........%4.2f...meter/sec</format>
+	      <halign>left</halign>
+	      <input>
+		<property>/instrumentation/vertical-speed-indicator/indi-speed-mps</property>
+	      </input>
+	    </label>
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>540</x>
+	      <y>-350</y>
+	      <format>wind-dir:.        ..%8.1f...........deg</format>
+	      <halign>left</halign>
+	      <input>
+		<property>/environment/wind-from-heading-deg</property>
+	      </input>
+	    </label>
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>540</x>
+	      <y>-360</y>
+	      <format>wind-speed:     ..%8.2f.............kt</format>
+	      <halign>left</halign>
+	      <input>
+		<property>/environment/wind-speed-kt</property>
+	      </input>
+	    </label>
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>540</x>
+	      <y>-370</y>
+	      <format>temp-cels:.       ..%8.1f...........cel</format>
+	      <halign>left</halign>
+	      <input>
+		<property>/environment/temperature-degc</property>
+	      </input>
+	    </label>
+	    
+	    <!-- extra cell properties right from window-->
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>540</x>
+	      <y>-380</y>
+	      <format>dU_conduction:                 %8.0f</format>
+	      <halign>left</halign>
+	      <input>
+		<property>fdm/jsbsim/buoyant_forces/gas-cell/dU_conduction</property>
+	      </input>
+	    </label>
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>540</x>
+	      <y>-390</y>
+	      <format>dU_radiation:                   %8.0f</format>
+	      <halign>left</halign>
+	      <input>
+		<property>fdm/jsbsim/buoyant_forces/gas-cell/dU_radiation</property>
+	      </input>
+	    </label>
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>540</x>
+	      <y>-400</y>
+	      <format>dU_solar-radiation:             %8.0f</format>
+	      <halign>left</halign>
+	      <input>
+		<property>fdm/jsbsim/buoyant_forces/gas-cell/dU_solar_radiation</property>
+	      </input>
+	    </label>
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>540</x>
+	      <y>-410</y>
+	      <format>dU_flame:                       %8.0f</format>
+	      <halign>left</halign>
+	      <input>
+		<property>fdm/jsbsim/buoyant_forces/gas-cell/dU_flame</property>
+	      </input>
+	    </label>
+	    
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>540</x>
+	      <y>-420</y>
+	      <format>HotAir-mol:  .......%12.0f</format>
+	      <halign>left</halign>
+	      <input>
+		<property>fdm/jsbsim/buoyant_forces/gas-cell/contents-mol</property>
+	      </input>
+	    </label>
+	    
+	    	    
+	    	    <!-- START test properties left from window-->  
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>-80</x>
+	      <y>-320</y>
+	      <format>weight_on_gear      %7.0f lbs</format>
+	      <halign>left</halign>
+	      <input>
+		<property>/fdm/jsbsim/forces/fbz-gear-lbs</property>
+	      </input>
+	    </label> 
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>-80</x>
+	      <y>-330</y>
+	      <format>forces/fbz-aero      %8.1f lbs</format>
+	      <halign>left</halign>
+	      <input>
+		<property>/fdm/jsbsim/forces/fbz-aero-lbs</property>
+	      </input>
+	    </label>
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>-80</x>
+	      <y>-340</y>
+	      <format>forces/fbz-external  %7.0f lbs</format>
+	      <halign>left</halign>
+	      <input>
+		<property>/fdm/jsbsim/forces/fbz-external-lbs</property>
+	      </input>
+	    </label> 
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>-80</x>
+	      <y>-350</y>
+	      <format>Buoyancy-lbs:       %7.0f lbs</format>
+	      <halign>left</halign>
+	      <input>
+		<property>fdm/jsbsim/buoyant_forces/gas-cell/buoyancy-lbs</property>
+	      </input>
+	    </label>
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>-80</x>
+	      <y>-360</y>
+	      <format>Gross Weight:       %7.0f lbs</format>
+	      <halign>left</halign>
+	      <input>
+		<property>fdm/jsbsim/inertia/weight-lbs</property>
+	      </input>
+	    </label>
+	  
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>-80</x>
+	      <y>-370</y>
+	      <format>Propane                 %7.1f lbs</format>
+	      <halign>left</halign>
+	      <input>
+		<property>/fdm/jsbsim/inertia/pointmass-weight-lbs[2]</property>
+	      </input>
+	    </label> 
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>-80</x>
+	      <y>-380</y>
+	      <format>TempDiff            %4d Rankine</format>
+	      <halign>left</halign>
+	      <input>
+		<property>/fdm/jsbsim/atmosphere/initT</property>
+	      </input>
+	    </label>
+	    
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>-80</x>
+	      <y>-390</y>
+	      <format>Ind. Altutude           %5.0f ft</format>
+	      <halign>left</halign>
+	      <input>
+		<property>/instrumentation/altimeter/indicated-altitude-ft</property>
+	      </input>
+	    </label> 
+    
+	    
+	    <!-- END test properties-->
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <y>-41</y>
+	      <format>GS:%7.5f kts</format>
+	      <halign>left</halign>
+	      <input>
+		<property>/instrumentation/gps/indicated-ground-speed-kt</property>
+	      </input>
+	    </label>    
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>460</x>
+	      <y>35</y>
+	      <format>METAR: Station ID........................</format>
+	      <halign>left</halign>
+	    </label>
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>620</x>
+	      <y>35</y>		
+	      <halign>left</halign>
+	      <input>
+		<property>environment/metar/station-id</property>
+	      </input>
+	    </label>
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>460</x>
+	      <y>45</y>
+	      <format>METAR:%4.1f........................wind direction</format>
+	      <halign>left</halign>
+	      <input>
+		<property>environment/metar/base-wind-dir-deg</property>
+	      </input>
+	    </label>
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <x>460</x>
+	      <y>55</y>
+	      <format>METAR:%4.1f.........................wind speed kt</format>
+	      <halign>left</halign>
+	      <input>
+		<property>environment/metar/base-wind-speed-kt</property>
+	      </input>
+	    </label>
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <y>-290</y>
+	      <halign>left</halign>
+	      <format>Home-Airport.....................</format>		
+	    </label>
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <y>-290</y>
+	      <x>-80</x>
+	      <input>
+		<property>autopilot/route-manager/destination/airport</property>
+	      </input>
+	    </label>
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <y>-300</y>
+	      <x>-80</x>
+	      <halign>left</halign>
+	      <format>True-Heading:...%5.2f.....degree</format>
+	      <input>
+		<property>autopilot/route-manager/wp/true-bearing-deg</property>
+	      </input>
+	    </label>
+	    
+	    <label>
+	      <width>2</width>
+	      <height>2</height>
+	      <y>-310</y>
+	      <x>-80</x>
+	      <halign>left</halign>
+	      <format>Distance:.......%8.2f........miles</format>
+	      <input>
+		<property>autopilot/route-manager/wp/dist</property>
+	      </input>
+	    </label>
+	    
+	    </PropertyList>

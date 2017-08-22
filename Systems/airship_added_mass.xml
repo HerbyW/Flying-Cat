@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+
+<system name="added-mass">
+  
+  <documentation>
+    
+    Usage:
+    
+    Define the following properties:
+    aero/constants/volume-ft3
+    aero/constants/length-diameter-ft2          (length^2 + diameter^2)
+    aero/constants/added-mass/k-axial
+    aero/constants/added-mass/k-traverse
+    aero/constants/added-mass/k-rotational
+    aero/constants/added-mass/tweak-factor   (1.0 is the standard value)
+    
+    </documentation>
+    
+    <channel name="startup">
+      
+      <!-- Allow the vehicle state to stabilize. -->
+      <fcs_function name="aero/added-mass/active">
+	<function>
+	  <min>
+	    <property> aero/constants/added-mass/tweak-factor </property>
+	    <max>
+	      <value> 0.0 </value>
+	      <difference>
+		<property> simulation/sim-time-sec </property>
+		<value> 2.0 </value>
+	      </difference>
+	    </max>
+	  </min>
+	</function>
+      </fcs_function>
+      
+      </channel>
+      
+      <channel name="translational">
+	
+	<fcs_function name="aero/added-mass/force-bx-lbs">
+	  <function>
+	    <product>
+	      <property> aero/added-mass/active </property>
+	      <property> forces/fbx-total-lbs</property>
+	      <property> external_reactions/x-const </property>
+	    </product>
+	  </function>
+	  <output> external_reactions/added-mass-bx/magnitude </output>
+	</fcs_function>
+	
+	<fcs_function name="aero/added-mass/force-by-lbs">
+	  <function>
+	    <product>
+	      <property> aero/added-mass/active </property>
+	      <property> forces/fby-total-lbs</property>
+	      <property> external_reactions/y-const </property>
+	    </product>
+	  </function>
+	  <output> external_reactions/added-mass-by/magnitude </output>
+	</fcs_function>
+	
+	<fcs_function name="aero/added-mass/force-bz-lbs">
+	  <function>
+	    <product>
+	      <property> aero/added-mass/active </property>
+	      <!--<property> forces/fbz-total-lbs</property>-->
+	      <property> external_reactions/z-const </property>
+	    </product>
+	  </function>
+	  <output> external_reactions/added-mass-bz/magnitude </output>
+	</fcs_function>
+	
+	</channel>
+	
+	<channel name="rotational">
+	  
+	  <fcs_function name="aero/added-mass/pitch-moment-lbsft">
+	    <function>
+	      <product>
+		<property> aero/added-mass/active </property>
+		<value> 0.05 </value>
+		<property> atmosphere/rho-slugs_ft3 </property>
+		<property> aero/constants/added-mass/k-rotational </property>
+		<property> aero/constants/volume-ft3 </property>
+		<property> aero/constants/length-diameter-ft2 </property>
+		<property> accelerations/qdot-rad_sec2 </property>
+	      </product>
+	    </function>
+	  </fcs_function>
+	  
+	  <fcs_function name="aero/added-mass/yaw-moment-lbsft">
+	    <function>
+	      <product>
+		<property> aero/added-mass/active </property>
+		<value> 0.05 </value>
+		<property> aero/constants/added-mass/k-rotational </property>
+		<property> atmosphere/rho-slugs_ft3 </property>
+		<property> aero/constants/volume-ft3 </property>
+		<property> aero/constants/length-diameter-ft2 </property>
+		<property> accelerations/rdot-rad_sec2 </property>
+	      </product>
+	    </function>
+	  </fcs_function>
+	  
+	  <pure_gain name="aero/added-mass/pitch-moment-force-lbs[0]">
+	    <input> aero/added-mass/pitch-moment-lbsft </input>
+	    <gain>-0.5</gain>
+	    <output> external_reactions/added-mass-pitch[0]/magnitude </output>
+	  </pure_gain>
+	  <pure_gain name="aero/added-mass/pitch-moment-force-lbs[1]">
+	    <input> aero/added-mass/pitch-moment-lbsft </input>
+	    <gain>0.5</gain>
+	    <output> external_reactions/added-mass-pitch[1]/magnitude </output>
+	  </pure_gain>
+	  
+	  
+	  <pure_gain name="aero/added-mass/yaw-moment-force-lbs[0]">
+	    <input> aero/added-mass/yaw-moment-lbsft </input>
+	    <gain>-0.5</gain>
+	    <output> external_reactions/added-mass-yaw[0]/magnitude </output>
+	  </pure_gain>
+	  <pure_gain name="aero/added-mass/yaw-moment-force-lbs[1]">
+	    <input> aero/added-mass/yaw-moment-lbsft </input>
+	    <gain>0.5</gain>
+	    <output> external_reactions/added-mass-yaw[1]/magnitude </output>
+	  </pure_gain>
+	  
+	  </channel>
+	  
+	  
+	  <!--Sandsacks Mooring  /fdm/jsbsim/animation/anchor-sacks == 2 -->
+	  <channel name="anchor">
+	    
+	    <fcs_function name="aero/added-mass/mooring_thrust">
+	      <function>
+		<product>
+		  <property> fcs/mooring-cmd-norm </property>
+		  <value>500</value>
+		  <table>
+		    <independentVar>position/ground-altitude</independentVar>
+		    <tableData>
+		      0.0     1.0
+		      0.13    1.0
+		      40.0  0.5
+		      81.5  0.0
+		    </tableData>
+		  </table>
+		</product>
+	      </function>
+	    </fcs_function>
+	    
+	    <pure_gain name="aero/added-mass/mooring_magnitude">
+	      <input>aero/added-mass/mooring_thrust</input>
+	      <gain>1.0</gain>
+	      <output>external_reactions/mooring/magnitude</output>
+	    </pure_gain>
+	    
+	    </channel>   
+	    
+	    <!--Anker Mooring  /fdm/jsbsim/animation/anchor-sacks == 1-->
+	    <channel name="anchor2">
+	      <fcs_function name="aero/added-mass/mooring2_thrust">
+		<function>
+		  <product>
+		    <property> fcs/mooring2-cmd-norm </property>
+		    <value>300</value>
+		    <table>
+		      <independentVar>position/ground-altitude</independentVar>
+		      <tableData>
+			0.0   1.0
+			0.12  0.0
+			5.0   0.1
+			6.0   0.7
+			7.0   1.0
+			10.0  5.0
+		      </tableData>
+		    </table>
+		  </product>
+		</function>
+	      </fcs_function>
+	      
+	      <pure_gain name="aero/added-mass/mooring2_magnitude">
+		<input>aero/added-mass/mooring2_thrust</input>
+		<gain>1.0</gain>
+		<output>external_reactions/mooring2/magnitude</output>
+	      </pure_gain>
+	    </channel> 
+	    
+	    <!--Turn Valve-->
+	    <channel name="turnvale">
+	      <fcs_function name="aero/added-mass/turnvalvel_thrust">
+		<function>
+		  <product>
+		    <property> fcs/turnvalvel-cmd-norm </property>
+		    <value>50</value>
+		  </product>
+		</function>
+	      </fcs_function>
+	      
+	      <pure_gain name="aero/added-mass/turnvalvel_magnitude">
+		<input>aero/added-mass/turnvalvel_thrust</input>
+		<gain>1.0</gain>
+		<output>external_reactions/turnvalvel/magnitude</output>
+	      </pure_gain>
+	      
+	      <fcs_function name="aero/added-mass/turnvalver_thrust">
+		<function>
+		  <product>
+		    <property> fcs/turnvalver-cmd-norm </property>
+		    <value>50</value>
+		  </product>
+		</function>
+	      </fcs_function>
+	      
+	      <pure_gain name="aero/added-mass/turnvalver_magnitude">
+		<input>aero/added-mass/turnvalver_thrust</input>
+		<gain>1.0</gain>
+		<output>external_reactions/turnvalver/magnitude</output>
+	      </pure_gain>
+	      
+	      </channel>
+	      
+	      </system>
+	      

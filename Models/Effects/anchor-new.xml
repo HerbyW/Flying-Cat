@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<PropertyList>
+  
+  <path>anchor-new.ac</path>
+  
+  <animation>
+    <type>noshadow</type>
+  </animation>
+  
+  <animation>
+    <type>select</type>	  
+    <condition>
+      <equals>
+        <property>sim/multiplay/generic/float[7]</property>
+        <value>1</value>
+      </equals>
+    </condition>
+  </animation>
+  
+  </PropertyList>

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+    #########################################################################################
+    modified or copyright by Herbert Wagner 01/2016 for followme car (Flightgear)
+    ##########################################################################################
+-->
+<PropertyList>
+	
+ <path>fuelgauge.ac</path>
+
+ <animation>
+  <type>material</type>
+  <object-name>face</object-name>
+  <object-name>needle</object-name>
+  <emission>
+    <factor-prop>controls/switches/gauge-light</factor-prop>
+    <red>0.35</red>
+    <green>0.35</green>
+    <blue>0.35</blue>
+  </emission>
+ </animation>
+ <animation>
+
+  <type>rotate</type>
+  <object-name>needle</object-name>
+  <property>/fdm/jsbsim/inertia/pointmass-weight-lbs[2]</property>
+  <factor>-0.22</factor>
+  <center>
+   <x-m>0.0</x-m>
+   <y-m>0.0</y-m>
+   <z-m>-0.015</z-m>
+  </center>
+  <axis>
+   <x>1.0</x>
+   <y>0.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+
+<animation>
+  <type>scale</type>   
+  <property>sim/signals/fdm-initialized</property>
+  <offset>1</offset>
+  <x-max>0.7</x-max>
+  <y-max>0.7</y-max>
+  <z-max>0.7</z-max>
+  <x-factor>0.7</x-factor>
+  <y-factor>0.7</y-factor>
+  <z-factor>0.7</z-factor>
+ </animation>
+</PropertyList>

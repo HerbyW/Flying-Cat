@@ -1,0 +1,316 @@
+<?xml version="1.0"?>
+<!--
+  Flying Cat Hot Air Balloon model for FlightGear  
+  Copyright (C) Herbert Wagner 2016
+  This file is licensed under the GPL license
+-->
+<PropertyList>
+
+ <!-- Specific keys -->
+ <title>Hot Air Balloon Serie by HerbyW 2016 Version 3.2 / Globos de Aire Caliente</title>
+ <key>
+  <name>q</name>
+  <desc>Step 1: Initialize everything, wait till balloon has the same temperatur as outside</desc>
+ </key>
+ <key>
+  <name>W</name>
+  <desc>Step 2: Filling Hot Air to -3% for take off</desc>
+ </key>
+ <key>
+  <name>D</name>
+  <desc>Blower On, use after declining to fill in the air-cell to maximal value</desc>
+ </key> 
+ <key>
+  <name>d</name>
+  <desc>Blower Out</desc>
+ </key> 
+ <key>
+  <name>g</name>
+  <desc>Ballast dropping</desc>
+ </key> 
+ <key>
+  <name>w</name>
+  <desc>Show current on-ground weight.</desc>
+ </key>
+ <key>
+  <name>F</name>
+  <desc>Open Parachute valve.</desc>
+ </key>
+ <key>
+  <name>f</name>
+  <desc>Close Parachute valve.</desc>
+ </key>
+ <key>
+  <name>R</name>
+  <desc>Rip envelope.</desc>
+ </key>
+ <key>
+  <name>E</name>
+  <desc>Anchor</desc>
+ </key>
+ <key>
+  <name>e</name>
+  <desc>Turn Valve left</desc>
+ </key>
+ <key>
+  <name>r</name>
+  <desc>Turn Valve right</desc>
+ </key>
+ <key>
+  <name>y</name>
+  <desc>Change Model View and Panel View</desc>
+ </key>
+ <!-- Handling instructions. -->
+ <text>
+Panel Manual for Hot Air Balloon Serie by HerbyW
+ 
+Preparing for Take-off
+ 
+Open HUD "h", you see a lot of values.
+Make the wind settings or metar data activ (see details below).
+Press 1. Temp or "q": we get now all temperatures to the outside temperatur and get the balloon empty on ground.
+Now press 2. HotAir, blows the air-cell to some level. Wait! (you may make a hot-fill with one burner)
+(The HUD shows you the filling values, also the volume-meter)
+Wait for the balloon to get filled, if you mess it up you will get strange weight issues. 
+Wait till the balloon is filled and in a standing position!
+Press 3.TakeOff or "W" to set the Hot Air cell to start conditions, press it again till the volume meter shows 100%.
+In the payload menue you may set your guests weight up to 4 persons.
+
+Take off
+
+Start the burner with the switches on the panel, be aware that the burner-system has 1000 horse powers!
+After a few minutes the balloon will start to lift 2-5 m, the fixed holding lines will be still activ.
+Shut down the burner! Last change to get everything on board and check your systems.
+
+Now you may loose the fixed lines and start your flight. (Pressing "E").
+
+In flight
+
+Ballast dropping ("g") OR fire on or out will get you to the desired height.
+Descending: Parachute-valve ("F" on "f" out), watch Volume-Meters!
+Use the blower "D" on, "d" out, to fill the air-cell after descending, and make the burner more effectiv.
+Your flight direction is the white arrow in the compass,
+adjust the airplane symbol by using the turn-valves "e" left, "r" right
+or the Autopilot switch on the right bottom "Orientation Drift Controller".
+Parachute Controller and Descending Controller you may set activ to controll
+the maximum vertical speed of 3 m/s (more will get you into unstable flight).
+The extra altitude hold switch should be activated if in horizontal flight,
+then it will hold your altitude, on the right top of the panel. 
+
+Befor Landing
+
+Set anchor "E", it will get you down if in contact with the ground.
+
+Ater touch down
+
+Open the Rip-valve "R", watch animation.
+
+You may make a new flight, just start from the top again.
+ 
+Maximal altitude 13200 m (ca 43000 ft)
+Maximal speed with jet-streams: +300 km/h
+
+The consumption of propane for the burners is now implemented and allows you a 6 hours flight in normal altitude.
+
+There is a extra meter for the cell-temperature in the blue box, it will shut down the burners if overheated.
+
+Tip's and tricks
+Sometimes the balloon start with a vertical speed of 30 m/s, if it happens just wait till it comes down
+and start normal, or use a different starting position.
+
+Change windspeed to change speed of the balloon:
+
+Weather Conditions: Fair weather -- detailed weather -- advanced settings
+Advanced weather Configuration: realistic weather, no terrain presampling!, Wind settings - Wind model: aloft interpol -- Wind Configuration
+
+300/3  20/45  90/80  150/115  210/150  270/175  290/250  270/250 260/250
+
+Flightlevel, Flightdirection
+
+  500	=   170 Grad
+1000	=   185 Grad
+1500	=   190 Grad
+2000	=   194 Grad
+2500	=   196 Grad
+3000	=   197 Grad
+3500	=   198 Grad
+4000	=   198 Grad
+4500	=   200 Grad
+5000	=   200 Grad
+5500	=   210 Grad
+6000	=   220 Grad
+6500	=   230 Grad
+7000	=   238 Grad
+
+This setting illuminates a heavy jetsream to the east, so that everyone can make the same flight conditions
+and a lot of differnt tasks may be done! FL00 is sea-level! Have fun!
+
+Most information is from Cameron Balloons (UK), for more vist the webpage and get the manual for Hot-Air-Ballooning!
+This version for Flightgear is handling most of it to get you the most realistic fun out of it.
+Copyright by Herbert Wagner 09-2016.
+
+############################################################################################################################
+ 
+Manual del panel para globos de aire caliente de HerbyW
+ 
+PREPARACION DEL DESPEGUE
+ 
+Abre el HUD "h", veras muchos valores.
+Realiza los ajustes de viento y los datos METAR activos (ver detalles abajo) *** ****
+
+
+
+Presiona 1. TEMP o "q": obtenemos ahora todas las temperaturas del exterior y el globo vacio en la tierra.
+
+Ahora presiona 2. HOTAIR (aire caliente), y ! espera ¡ 
+
+(puedes hacer Hot-fill (relleno caliente) con un solo quemador)
+(El HUD te muestra los valores de relleno, tambien la medida del volumen)
+
+Espera a que el globo se llene, sino lo haces lo liaras, obteniendo problemas en el peso. 
+! Espera hasta que el globo este relleno y en posicion de pie sostenido ¡
+
+
+Presiona 3. TAKE-OFF (despegue) o "W" para configurar la celula de aire caliente en condicion de inicio), presionala de nuevo hasta
+que el medidor de volumen muestre 100%
+En el FGMENU --Carga y combustible--, podrias acondicionar el peso de tus invitados hasta 4 personas. 
+
+
+
+DESPEGUE
+
+Inicia el BURNER (quemador) con los interruptores del panel, ! estad advertidos ya que el sistema de quemadores tiene 1000 Cv de potencia ¡
+Unos pocos minutos despues, el globo comenzara a ascender de 2-5m, las lineas de anclaje fijas aun estaran activas.
+¡ Apaga el BURNER (quemador) ! Ultima oportunidad para poner todo a bordo y chequear los sistemas.
+
+Ahora debes soltar las lineas de anclaje fijas y comenzar tu vuelo. (presionando "E").
+
+
+
+EN VUELO
+
+BALLAST DROPPING (lanzamiento de lastre) "g" y fuego encendido/apagado te llevaran a la altitud deseada.
+
+El interruptor ALTITUD HOLD (mantener altitud) en la parte superior derecha del panel debe ser activado si se vuela en horizontal,
+y entonces mantendra tu altitud
+
+
+
+DESCENDER:
+
+PARACHUTE-VALVE (valvula de paracaidas)  "F" ENCENDIDO "f" APAGADO, ¡ observa el medidor de volumen !
+Usa BLOWER (soplador) "D" ENCENDIDO "d" APAGADO, para rellenar la celda de aire despues de descender,
+y ser mas efectivo con el BURNER (quemador)
+La indicacion de la direccion de tu vuelo es una flecha blanca en la brujula,
+ajusta el simbolo del aeroplano usando las valvulas de giro L-TURN-R "e" izquierda,"r" derecha
+o con el interruptor del autopiloto ORIENTATION DRIFT CONTROLLER (Controlador de la orientacion de deriva) situado abajo a la derecha 
+
+
+Puedes activar PARACHUTE CONTROLER (controlador del paracaidas) y DESCENDING CONTROLLER (controlador del descenso) para controlar
+la velocidad maxima vertical de 3m/s (con mas obtrendrias un vuelo inestable)
+
+
+
+PREPARACION DEL ATERRIZAJE
+
+ANCHOR (Anclas) Bajar anclas "E", te mantendran abajo si hacen contacto con el suelo.
+
+
+DESPUES DE ATERRIZAR
+
+Abrir RIP-VALVE (valvula de envoltura) "R", observa la animacion.
+
+
+Si quieres hacer un nuevo vuelo, comienza estas instrucciones de nuevo.
+
+ 
+Altitud maxima 13200 m (ca 43000 ft)
+Maxima velocidad con corrientes de chorro: +300 km/h
+
+El consumo de propano de los quemadores esta ahora implementado y te permite un vuelo de 6 horas en altitud normal.
+En el cuadrante azul del panel hay un medidor extra que mide la temperatura de la celda CELL-TEMPERATURE, este apagaria
+los quemadores si se sobrecalentaran
+
+
+TRUCOS Y CONSEJOS
+A veces el globo se inicia con una velocidad vertical de 30 m/s, si esto sucede espera un momento hasta que baje e inicia normalmente,
+o usa otra posicion de salida.
+
+
+***
+
+Cambia la velocidad del viento para cambiar la velocidad del globo:
+Ir a FGMENU -- WEATHER CONDITIONS: Seleccionar Fair Weather -- DETAILED WEATHER -- ADVANCED SETTINGS
+
+AVANCED WEATHER CONFIGURATION: Realistic Weather, ¡ NO terrain presampling ! WIND SETTINGS - Wind Model: aloft interpol -- Wind Configuration
+
+Rellenar los siguientes datos de direccion del viento-intensidad para crear un circuito virtual de viento interpolado en capas de altitud.
+
+300/3  20/45  90/80  150/115  210/150  270/175  290/250  270/250 260/250
+
+Esta configuracion imagina una corriente de chorro fuerte hacia el Este, de tal manera que todos pueden volar en la mismas condiciones
+y un monton de otras tareas pueden ser realizadas. ! FL00 es el Nivel del Mar, Que os divertais !
+
+***
+
+La mayoria de la informacion es de Cameron Ballons (UK), para mas informacion visita la pagina web y  ¡ consigue el manual
+de Globos de Aire Caliente !
+Esta version para FlightGear maneja la mayor parte del manual con el mayor realismo y diversion.
+Copyright Herbert Wagner 09-2016.
+</text>
+
+
+ <key>
+  <name>q</name>
+  <desc>Paso 1: Inizializa todo, espera hasta que el globo tenga la misma temperatura que el exterior.</desc>
+ </key>
+ <key>
+  <name>W</name>
+  <desc>Paso 2: Rellenar de aire caliente hasta -3% para el despegue</desc>
+ </key>
+ <key>
+  <name>D</name>
+  <desc>(Blower ON) Soplador encendido, usar despues de declinar hasta rellenar la celda de aire (air-cell) a su maximo valor</desc>
+ </key> 
+ <key>
+  <name>d</name>
+  <desc>(Blower Out) Soplador apagado</desc>
+ </key> 
+ <key>
+  <name>g</name>
+  <desc>Lanzar lastre</desc>
+ </key> 
+ <key>
+  <name>w</name>
+  <desc>Mostrar peso actual en tierra</desc>
+ </key>
+ <key>
+  <name>F</name>
+  <desc>Abrir la valvula del paracaidas</desc>
+ </key>
+ <key>
+  <name>f</name>
+  <desc>Cerrar la valvula del paracaidas</desc>
+ </key>
+ <key>
+  <name>R</name>
+  <desc>(Rip valve) Despegar la valvula de envoltura</desc>
+ </key>
+ <key>
+  <name>E</name>
+  <desc>Anclas</desc>
+ </key>
+ <key>
+  <name>e</name>
+  <desc>(L-Turn) Valvula de giro a izquierda</desc>
+ </key>
+ <key>
+  <name>r</name>
+  <desc>(R-Turn) Valvula de giro a derecha</desc>
+ </key>
+ <key>
+  <name>y</name>
+  <desc>Cambiar a vista de modelo y panel View</desc>
+ </key>
+ 
+</PropertyList>

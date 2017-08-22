@@ -1,2 +1,4 @@
 # Flying-Cat
-Hot-Air-Balloon-Series with 6 different balloons with ground and air animations
+for Flightgear Flightsimulator
+
+Hot-Air-Balloon-Series with 6 different shapes, ground and air animations, instrumentation

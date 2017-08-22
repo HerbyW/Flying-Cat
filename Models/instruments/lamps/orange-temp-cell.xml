@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!--
+    #############################################################################
+    #    (C) 2006 by Yurik V. Nikiforoff - port for FGFS,  FDM,   	#
+    #	2d & 3d instruments, animations, systems and over.		   	#
+    #    	yurik@megasignal.com					   	#
+    #############################################################################	  
+    -->
+<!--
+    #########################################################################################
+    Antonov-Aircrafts and SpaceShuttle :: Herbert Wagner November2014-June2015
+    Animations, FDM, Instrumentation, Rembrandt, ALS, Paratroopers, Cargo, Sounds
+    all with full Multiplayer Support.
+    Development is ongoing, see latest version: https://github.com/HerbyW?tab=repositories
+    This file is licenced under the terms of the GNU General Public Licence V3 or later
+    D-Leon: technical assistance
+    Firefly: 3D model improvment
+    Eagel: Liveries
+    Michat, Joe, Miguel, 3m, D-07007 and many others: testing and giving hints for impovements
+    Instruments from; Tu-154b, Il-76D, 707
+    ##########################################################################################
+-->
+<!-- Green lamp
+3D instrument for Tu-154 -->
+<PropertyList>
+ <path>orange_lamp.ac</path>
+<!--External panel lighting-->
+<animation>
+  <type>material</type>
+  <object-name>_c_1</object-name>
+  <object-name>_c_2</object-name>
+  <object-name>_d_1</object-name>
+  <emission>
+    <factor-prop>controls/switches/gauge-light</factor-prop>
+      <red>   0.235 </red>
+      <green> 0.235 </green>
+      <blue>  0.235 </blue>
+    </emission>
+</animation>
+<!--Brightness-->
+<animation>
+  <type>material</type>
+  <object-name>_d_2</object-name>
+  <emission>      
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+    </emission>
+</animation>
+
+<!--Set-->
+<animation>
+  <type>select</type>
+  <object-name>_d_2</object-name>
+  <condition>  
+    <greater-than>
+	<property>/fdm/jsbsim/buoyant_forces/gas-cell/Celsius</property>
+	<value>110</value>
+      </greater-than>
+  </condition>
+</animation>
+
+<animation>
+<type>scale</type>
+<object-name>_c_1</object-name>
+  <object-name>_c_2</object-name>
+  <object-name>_d_2</object-name>
+  <object-name>_d_1</object-name>
+<property>sim/signals/fdm-initialized</property>
+<x-min>0.50</x-min>
+<y-min>0.50</y-min>
+<z-min>0.50</z-min>
+<x-factor>0.50</x-factor>
+<y-factor>0.50</y-factor>
+<z-factor>0.50</z-factor>
+</animation>
+
+</PropertyList>

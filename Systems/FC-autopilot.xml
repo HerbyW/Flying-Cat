@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+    ###################################################################################
+    Antonov and Topolev Aircrafts and SpaceShuttle :: Herbert Wagner November2014-June2015
+    Development is ongoing, see latest version: www.github.com/HerbyW
+    This file is licenced under the terms of the GNU General Public Licence V3 or later    
+    ###################################################################################
+-->
+
+<PropertyList>
+
+<!--Orientation Controller-->
+
+ <pi-simple-controller>
+    <name>Orientation Controller</name>
+    <debug>false</debug>
+    <enable>
+      <condition>
+	<equals>
+	  <property>/autopilot/locks/heading</property>
+	  <value>orientation</value>
+	</equals>
+      </condition>
+    </enable>
+    <input>
+      <prop>/instrumentation/drift</prop>
+    </input>
+    <reference>
+      <value>0.0</value>
+    </reference>
+    <output>
+      <property>/fdm/jsbsim/fcs/turnvalve</property>
+    </output>
+    <config>
+      <Kp>-1.0</Kp>
+      <Ki>0.0</Ki>
+      <u_min>-1</u_min>
+      <u_max>1</u_max>
+    </config>
+  </pi-simple-controller>
+  
+
+</PropertyList>

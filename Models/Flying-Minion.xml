@@ -1,0 +1,398 @@
+<?xml version="1.0"?>
+<!--
+  Flying-Minion 3d model.
+
+  Copyright (C) 2016 Herbert Wagner
+  Parts of burner, strings and frame from HotAirBalloon
+  This file is licensed under the GPL license version 2 or later.
+-->
+<PropertyList>
+
+ <path>minion06.ac</path>
+ 
+ <sound>
+       <path>Aircraft/Flying-Cat/Sounds/cat-sounds.xml</path>
+ </sound> 
+
+ <model>
+  <name>skis</name>
+  <path>Aircraft/Flying-Cat/Models/skis.ac</path>
+  <offsets>
+   <x-m> 0.0 </x-m>
+   <y-m> 0.0 </y-m>
+   <z-m> -0.02 </z-m>
+   <roll-deg> 0.0 </roll-deg>
+   <heading-deg>0</heading-deg>
+  </offsets>
+ </model>
+ 
+ <animation>
+    <object-name>Cone</object-name>
+    <object-name>Cone.001</object-name>
+    <object-name>minblack</object-name>    
+    <object-name>minblue</object-name>
+    <object-name>mingelb</object-name>
+    <object-name>mingrau</object-name>
+    <object-name>minweiss</object-name>
+    <object-name>brenner</object-name>
+    <object-name>gasbottle</object-name>
+    <object-name>gasbottle-extra</object-name>
+    <object-name>gestell</object-name>
+    <object-name>korb</object-name>
+    <object-name>leinen</object-name>
+    <object-name>zufuehrung</object-name>
+  </animation>
+  
+  <animation>
+    <type>noshadow</type>
+    <object-name>Cone</object-name>
+    <object-name>Cone.001</object-name>
+    <object-name>minblack</object-name>    
+    <object-name>minblue</object-name>
+    <object-name>mingelb</object-name>
+    <object-name>mingrau</object-name>
+    <object-name>minweiss</object-name>
+    <object-name>brenner</object-name>
+    <object-name>gasbottle</object-name>
+    <object-name>gasbottle-extra</object-name>
+    <object-name>gestell</object-name>
+    <object-name>korb</object-name>
+    <object-name>leinen</object-name>
+    <object-name>zufuehrung</object-name>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>Cone</object-name>  
+    <emission>
+      <factor-prop>sim/multiplay/generic/int[7]</factor-prop>
+      <red>   0.105 </red>
+      <green> 0.0 </green>
+      <blue>  0.0 </blue>
+    </emission>
+  </animation>
+  
+  <animation>
+    <type>material</type>
+    <object-name>minblack</object-name>   
+    <emission>
+      <factor-prop>sim/multiplay/generic/int[7]</factor-prop>
+      <red>   0.007 </red>
+      <green> 0.0 </green>
+      <blue>  0.0033 </blue>
+    </emission>
+  </animation>
+  
+  <animation>
+    <type>material</type>
+    <object-name>minblue</object-name>    
+    <emission>
+      <factor-prop>sim/multiplay/generic/int[7]</factor-prop>
+      <red>   0.0004 </red>
+      <green> 0.144 </green>
+      <blue>  0.479 </blue>
+    </emission>
+  </animation>
+  
+  <animation>
+    <type>material</type>
+    <object-name>mingelb</object-name>    
+    <emission>
+      <factor-prop>sim/multiplay/generic/int[7]</factor-prop>
+      <red>   0.584 </red>
+      <green> 0.423 </green>
+      <blue>  0.002 </blue>
+    </emission>
+  </animation>
+  
+  <animation>
+    <type>material</type>
+    <object-name>mingrau</object-name>       
+    <emission>
+      <factor-prop>sim/multiplay/generic/int[7]</factor-prop>
+      <red>   0.063 </red>
+      <green> 0.0356 </green>
+      <blue>  0.0704 </blue>
+    </emission>
+  </animation>
+  
+  <animation>
+    <type>material</type>
+    <object-name>minweiss</object-name>       
+    <emission>
+      <factor-prop>sim/multiplay/generic/int[7]</factor-prop>
+      <red>   0.6 </red>
+      <green> 0.6 </green>
+      <blue>  0.6 </blue>
+    </emission>
+  </animation>
+
+  <animation>
+  <type>select</type>
+  <object-name>Cone</object-name>
+  <condition>
+    <equals>
+    <property>sim/multiplay/generic/float[3]</property>
+    <value> 0 </value>
+    </equals>  
+  </condition>
+</animation>
+
+  <animation>
+  <type>select</type>
+  <object-name>Cone.001</object-name>
+  <condition>
+    <greater-than>
+    <property>sim/multiplay/generic/float[3]</property>
+    <value> 0 </value>
+    </greater-than>  
+  </condition>
+</animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>Cone.001</object-name>
+    <emission>
+      <factor-prop>sim/multiplay/generic/float[3]</factor-prop>
+      <offset>0.0</offset>
+      <red>   0.4 </red>
+      <green> 0.12 </green>
+      <blue>  0.0 </blue>
+    </emission>
+  </animation>
+
+
+ <!--Gas Flame -->
+ 
+ <model>
+  <name>gas-flame1</name>
+  <path>Aircraft/Flying-Cat/Models/Effects/flame1.xml</path>
+  <offsets>
+    <x-m>0.178</x-m>
+    <y-m>-0.0</y-m>
+    <z-m>3.15</z-m>
+    <pitch-deg>0</pitch-deg>
+  </offsets>
+</model>
+
+<model>
+  <name>gas-flame2</name>
+  <path>Aircraft/Flying-Cat/Models/Effects/flame2.xml</path>
+  <offsets>
+    <x-m>-0.175</x-m>
+    <y-m>0.0</y-m>
+    <z-m>3.15</z-m>
+    <pitch-deg>0</pitch-deg>
+  </offsets>
+</model>
+
+
+
+ <!-- 3d instruments -->
+ <model>
+  <name>Instruments</name>
+  <path>Aircraft/Flying-Cat/Models/instruments_cat.xml</path>
+  <offsets>
+   <x-m>   -1.10 </x-m>
+   <y-m>  -0.00 </y-m>
+   <z-m> 1.1 </z-m>
+   <pitch-deg> -50.0 </pitch-deg>
+  </offsets>
+ </model>
+ 
+ <model>
+  <name>wind</name>
+  <path>Aircraft/Flying-Cat/Models/windkreis2.ac</path>
+  <offsets>
+   <x-m> -1.032 </x-m>
+   <y-m>  -0.00 </y-m>
+   <z-m>  0.943 </z-m>
+   <roll-deg> 70.0 </roll-deg>
+   <heading-deg>270</heading-deg>
+  </offsets>
+ </model>
+ 
+ <animation>
+    <type>material</type>
+    <object-name>wind</object-name>
+    <emission>
+      <factor-prop>controls/switches/gauge-light</factor-prop>
+      <red>   0.15 </red>
+      <green> 0.15 </green>
+      <blue>  0.15 </blue>
+    </emission>
+  </animation>
+
+
+ <model>
+  <path>Aircraft/Flying-Cat/Models/Effects/sandsacks.xml</path>
+  <offsets>
+    <x-m>0</x-m>
+    <y-m>0</y-m>
+    <z-m>0.1</z-m>
+    <pitch-deg>0</pitch-deg>
+  </offsets>
+ </model>
+ 
+ <model>
+  <path>Aircraft/Flying-Cat/Models/Effects/anchor-new.xml</path>
+  <offsets>
+    <x-m>0</x-m>
+    <y-m>0</y-m>
+    <z-m>-1.150</z-m>
+    <pitch-deg>0</pitch-deg>
+  </offsets>
+ </model>
+ 
+  <text>
+        <name>Callsign</name>
+        <offsets>
+            <x-m>0.685</x-m>
+            <y-m>-9.25</y-m>
+            <z-m>19.2</z-m>
+            <roll-deg>0</roll-deg>
+            <pitch-deg>0</pitch-deg>
+            <heading-deg>0</heading-deg>
+        </offsets>
+        <alignment>center-center</alignment>
+        <axis-alignment>xz-plane</axis-alignment>
+        <type type="string">text-value</type>
+        <property type="string">sim/multiplay/generic/string[0]</property>
+        <format type="string">%.7s</format>
+        <font>arial_black.txf</font>
+        <character-size>0.6</character-size>
+        <character-aspect-ratio type="double">1.0</character-aspect-ratio>
+        <font-resolution>
+            <width type="int">128</width>
+            <height type="int">128</height>
+        </font-resolution>
+  </text>
+    
+    <animation>
+        <type>material</type>
+         <object-name>Callsign</object-name>         
+        <emission>
+            <red>0.5</red>
+            <green>0.5</green>
+            <blue>0.5</blue>
+        </emission>        
+    </animation>
+
+<model>
+	<path>Aircraft/Flying-Cat/Models/Effects/signal.xml</path>
+	<offsets>
+	  <x-m> -200 </x-m>
+	  <y-m> 0 </y-m>
+	  <z-m> -40 </z-m>	  
+	</offsets>
+      </model>
+
+ <!-- Hull animation on ground--> 
+ 
+  <animation>
+    <type>rotate</type>
+    <object-name>Cone</object-name>
+    <object-name>Cone.001</object-name>
+    <object-name>minblack</object-name>    
+    <object-name>minblue</object-name>
+    <object-name>mingelb</object-name>
+    <object-name>mingrau</object-name>
+    <object-name>minweiss</object-name>
+    <object-name>Callsign</object-name>
+    <property>sim/multiplay/generic/float[0]</property>
+    <interpolation>
+      <entry><ind> 0.0  </ind><dep>89.3</dep></entry>
+      <entry><ind> 0.045  </ind><dep>89.3</dep></entry>
+      <entry><ind> 0.32  </ind><dep> 60 </dep></entry>
+      <entry><ind> 0.77 </ind><dep> 0  </dep></entry>
+      <entry><ind> 0.80 </ind><dep> -4 </dep></entry>
+      <entry><ind> 0.85 </ind><dep>  2 </dep></entry>
+      <entry><ind>  0.88 </ind><dep>  0 </dep></entry>
+      <entry><ind>   1  </ind><dep>  0 </dep></entry>
+    </interpolation>
+    <center>
+      <x-m> 0 </x-m>
+      <y-m> 0 </y-m>
+      <z-m> 0 </z-m>
+    </center>
+    <axis>
+      <x> 0 </x>
+      <y> -1 </y>
+      <z> 0 </z>
+    </axis>
+  </animation> 
+
+  <animation>
+    <type>scale</type>
+    <object-name>Cone</object-name>
+    <object-name>Cone.001</object-name>
+    <object-name>minblack</object-name>    
+    <object-name>minblue</object-name>
+    <object-name>mingelb</object-name>
+    <object-name>mingrau</object-name>
+    <object-name>minweiss</object-name>
+    <object-name>Callsign</object-name> 
+    <property>sim/multiplay/generic/float[0]</property>
+     <y-min>1.0</y-min>
+     <y-max>1.0</y-max>
+     <z-min>1.0</z-min>     
+     <z-max>1.0</z-max>     
+     <x-min>0.1</x-min>
+     <x-max>1.0</x-max>
+     <x-factor>3</x-factor>
+  </animation>  
+   
+  <animation>
+    <type>scale</type>
+    <object-name>Cone</object-name>
+    <object-name>Cone.001</object-name>
+    <object-name>minblack</object-name>    
+    <object-name>minblue</object-name>
+    <object-name>mingelb</object-name>
+    <object-name>mingrau</object-name>
+    <object-name>minweiss</object-name>
+    <object-name>Callsign</object-name> 
+    <property>sim/multiplay/generic/float[0]</property>     
+     <x-min>0.89</x-min>
+     <x-max>0.89</x-max>
+     <x-factor>1</x-factor>     
+     <y-min>0.89</y-min>
+     <y-max>0.89</y-max>
+     <y-factor>1</y-factor>     
+     <z-min>1.25</z-min>     
+     <z-max>1.25</z-max> 
+     <z-factor>1</z-factor>
+  </animation>  
+  
+  <!-- Hull animation in Air or at stat up  --> 
+
+  <animation>
+    <type>scale</type>
+    <object-name>Cone</object-name>
+    <object-name>Cone.001</object-name>
+    <object-name>minblack</object-name>    
+    <object-name>minblue</object-name>
+    <object-name>mingelb</object-name>
+    <object-name>mingrau</object-name>
+    <object-name>minweiss</object-name>
+    <object-name>Callsign</object-name> 
+    <property>sim/multiplay/generic/float[1]</property>     
+     <x-min>1</x-min>
+     <x-max>1.1236</x-max>
+     <x-factor>1.1236</x-factor>     
+     <y-min>1</y-min>
+     <y-max>1.1236</y-max>
+     <y-factor>1.1236</y-factor>     
+     <z-min>0.8</z-min>     
+     <z-max>1</z-max> 
+     <z-factor>0.8</z-factor>
+  </animation>
+  
+ <!-- LOD for the model as a whole -->
+ <animation>
+  <type>range</type>
+  <min-m>0</min-m>
+  <max-m>35000</max-m>
+ </animation>
+
+</PropertyList>

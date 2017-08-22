@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    #########################################################################################
+    Antonov-Aircrafts and SpaceShuttle :: Herbert Wagner November2014-June2015
+    Animations, FDM, Instrumentation, Rembrandt, ALS, Paratroopers, Cargo, Sounds
+    all with full Multiplayer Support.
+    Development is ongoing, see latest version: https://github.com/HerbyW?tab=repositories
+    This file is licenced under the terms of the GNU General Public Licence V3 or later
+    D-Leon: technical assistance
+    Firefly: 3D model improvment
+    Eagel: Liveries
+    Michat, Joe, Miguel, 3m, D-07007 and many others: testing and giving hints for impovements
+    Instruments from; Tu-154b, Il-76D, 707
+    ##########################################################################################
+-->
+
+<PropertyList>
+
+  <path>switch2.ac</path>
+
+  <animation>
+    <object-name>fond</object-name>
+    <object-name>switch</object-name>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>fond</object-name>
+    <object-name>switch</object-name>
+    <emission>
+      <factor-prop>controls/switches/gauge-light</factor-prop>
+      <red>   0.35 </red>
+      <green> 0.35 </green>
+      <blue>  0.35 </blue>
+    </emission>
+  </animation>
+  
+  <animation>
+    <type>pick</type>
+    <object-name>switch</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>property-toggle</command>
+        <property>/fdm/jsbsim/fcs/turnvalver-cmd-norm</property>
+      </binding>      
+    </action>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>switch</object-name>
+    <property>/fdm/jsbsim/fcs/turnvalver-cmd-norm</property>
+    <factor> -90 </factor>
+    <center>
+      <x-m> 0 </x-m>
+      <y-m> 0 </y-m>
+      <z-m> 0 </z-m>
+    </center>
+    <axis>
+      <x>  0 </x>
+      <y>  1 </y>
+      <z>  0 </z>
+    </axis>
+  </animation>
+
+   <animation>
+  <type>scale</type>
+  <object-name>fond</object-name>
+  <object-name>switch</object-name>    
+  <property>sim/signals/fdm-initialized</property>
+  <offset>1</offset>
+  <x-max>2.0</x-max>
+  <y-max>2.0</y-max>
+  <z-max>2.0</z-max>
+  <x-factor>2.0</x-factor>
+  <y-factor>2.0</y-factor>
+  <z-factor>2.0</z-factor>
+ </animation>
+
+
+</PropertyList>

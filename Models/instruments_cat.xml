@@ -1,0 +1,526 @@
+<?xml version="1.0"?>
+<!--
+  Flying-Cat 3d instrument box.
+  Copyright (C) 2016 Herbert Wagner
+  This file is licensed under the GPL license version 2 or later.
+-->
+<PropertyList>
+
+ <path>instrument_box3.ac</path>
+
+ <offsets>
+  <!-- x/y/z == back/right/up -->  <heading-deg>270</heading-deg>
+  <x-m> 0.0 </x-m>
+  <y-m> 0.0 </y-m>
+  <z-m> -0.120 </z-m>
+ </offsets>
+ 
+ <animation>
+        <type>material</type>
+         <object-name>Cube.001</object-name>         
+        <emission>
+            <factor-prop>controls/switches/gauge-light</factor-prop>
+            <red>0.15</red>
+            <green>0.15</green>
+            <blue>0.15</blue>
+        </emission>        
+    </animation>
+ 
+
+ <!-- Clock -->
+
+ <model>
+  <name>Clock</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/achs-2/achs-2.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.25 </x-m>
+   <y-m>  0.055 </y-m>
+   <z-m>  0.155 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <name>stopClock</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/achs-2/timeset.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.25 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  0.155 </z-m>
+  </offsets>
+ </model>
+ 
+ <!-- Outside-Temp -->
+
+ <model>
+  <name>tnv-15</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/tnv-15/tnv-15.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.25 </x-m>
+   <y-m>  0.055 </y-m>
+   <z-m>  0.075 </z-m>
+  </offsets>
+ </model>
+
+ <!-- Altimeter -->
+ 
+ <model>
+  <name>Altimeter-m</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/uvid-15/uvid-15-m.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m> -0.015 </x-m>
+   <y-m>  0.055 </y-m>
+   <z-m>  0.135 </z-m>
+  </offsets>
+ </model>
+ <model>
+   
+  <name>Altimeter-ft</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/uvid-15/uvid-15-ft.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m> -0.115 </x-m>
+   <y-m>  0.055 </y-m>
+   <z-m>  0.135 </z-m>
+  </offsets>
+ </model>
+ 
+ <!-- Vertical Indicators -->
+ 
+ <model>
+  <name>VSI30</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/var/var-30.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.17 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  0.15 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <name>VSI75</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/var/var-75.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.17 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  0.05 </z-m>
+  </offsets>
+ </model>
+ 
+ <!-- Orientation Compass -->
+ 
+ <model>
+  <name>GasValve</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/ush/ush.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  -0.057 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  0.023 </z-m>
+  </offsets>
+ </model>
+ 
+ <!-- Speed Indicator -->
+ 
+ <model>
+  <name>SpeedInd</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/speed_ind/speed_ind.xml</path>
+  <offsets>
+   <heading-deg>270.0</heading-deg>
+   <x-m>  -0.23 </x-m>
+   <y-m>  0.055 </y-m>
+   <z-m>  0.139 </z-m>
+  </offsets>
+ </model>
+ 
+ <!-- Ground elevation -->
+ 
+ <model>
+  <name>rv-5m</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/rv-5m/rv-5m.xml</path>
+  <offsets>
+   <heading-deg>90.0</heading-deg>
+   <x-m>  -0.23 </x-m>
+   <y-m>  0.055 </y-m>
+   <z-m>  0.033 </z-m>
+  </offsets>
+ </model>
+
+<!-- Switches -->
+
+<model>
+  <name>gaugelights</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/switch/gaugelights.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  -0.272 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  -0.122 </z-m>
+  </offsets>
+ </model>
+
+
+ <model>
+  <name>Burner2</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/switch/burner2.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.057 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  0.156 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <name>Burner3</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/switch/burner.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.10 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  0.156 </z-m>
+  </offsets>
+ </model>
+ 
+
+ <model>
+  <path>Aircraft/Flying-Cat/Models/instruments/lamps/red-burner2.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.045 </x-m>
+   <y-m>  0.045 </y-m>
+   <z-m>  0.168 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <path>Aircraft/Flying-Cat/Models/instruments/lamps/red-burner.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.088 </x-m>
+   <y-m>  0.045 </y-m>
+   <z-m>  0.168 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <name>fuel</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/propane/fuel.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.079 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  0.117 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <name>anchor</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/switch/anchor.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.25 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  -0.093 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <path>Aircraft/Flying-Cat/Models/instruments/lamps/red-anchor.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.228 </x-m>
+   <y-m>  0.045 </y-m>
+   <z-m>  -0.105 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <path>Aircraft/Flying-Cat/Models/instruments/lamps/red-anchor-sand.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.228 </x-m>
+   <y-m>  0.045 </y-m>
+   <z-m>  -0.085 </z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>blower</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/switch/blower.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.087 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  0.070 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <path>Aircraft/Flying-Cat/Models/instruments/lamps/green-blower.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.065 </x-m>
+   <y-m>  0.045 </y-m>
+   <z-m>  0.065 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <name>parachute-valve</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/switch/parachute-valve.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.087 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  0.02 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <path>Aircraft/Flying-Cat/Models/instruments/lamps/green-parachute.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.065 </x-m>
+   <y-m>  0.045 </y-m>
+   <z-m>  0.008 </z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>ripvalve</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/switch/ripvalve.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.25 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  -0.153 </z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>turnvalvel</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/switch/turnvalvel.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.035 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  0.02 </z-m>
+  </offsets>
+ </model>
+
+
+ <model>
+  <name>turnvalver</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/switch/turnvalver.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  -0.145 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  0.02 </z-m>
+  </offsets>
+ </model> 
+ 
+ <model>
+  <name>takeoffweight</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/switch/takeoffweight.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.135 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  -0.155 </z-m>
+  </offsets>
+ </model>
+ 
+<!-- Buttons --> 
+ 
+ <model>
+  <name>signal</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/switch/signal-button.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.245 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  -0.018 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <name>button-1</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/switch/button-1.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.16 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  -0.12 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <path>Aircraft/Flying-Cat/Models/instruments/lamps/red-temp.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.1612 </x-m>
+   <y-m>  0.044 </y-m>
+   <z-m>  -0.12 </z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>button-2</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/switch/button-2.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.11 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  -0.12 </z-m>
+  </offsets>
+ </model>
+ 
+
+ <!-- Autopilot -->
+
+<model>
+  <name>AP-orientation</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/switch/AP-orientation.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.002 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  -0.122 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <path>Aircraft/Flying-Cat/Models/instruments/lamps/green-drift.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  0.025 </x-m>
+   <y-m>  0.045 </y-m>
+   <z-m>  -0.122 </z-m>
+  </offsets>
+ </model>
+
+<model>
+  <name>AP-parachute</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/switch/AP-parachute.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  -0.055 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  -0.122 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <path>Aircraft/Flying-Cat/Models/instruments/lamps/green-para.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  -0.032 </x-m>
+   <y-m>  0.045 </y-m>
+   <z-m>  -0.122 </z-m>
+  </offsets>
+ </model>
+  
+<model>
+  <name>AP-descend</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/switch/AP-descend.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  -0.112 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  -0.122 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <path>Aircraft/Flying-Cat/Models/instruments/lamps/green-desc.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  -0.089 </x-m>
+   <y-m>  0.045 </y-m>
+   <z-m>  -0.122 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <name>AP-alt</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/switch/AP-altitude.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  -0.169 </x-m>
+   <y-m>  0.0501 </y-m>
+   <z-m>  -0.122 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+  <path>Aircraft/Flying-Cat/Models/instruments/lamps/green-alt.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  -0.146 </x-m>
+   <y-m>  0.045 </y-m>
+   <z-m>  -0.122 </z-m>
+  </offsets>
+ </model>
+ 
+ <!-- Volume Meters -->
+ <model>
+  <path>Aircraft/Flying-Cat/Models/instruments/vol/vol-hot.xml</path>
+  <offsets>
+   <heading-deg>270</heading-deg>
+   <x-m>  -0.246 </x-m>
+   <y-m>  0.053 </y-m>
+   <z-m>  -0.065 </z-m>
+  </offsets>
+ </model>
+ 
+ <!-- Cell-Temp -->
+
+ <model>
+  <name>tnv-15-2</name>
+  <path>Aircraft/Flying-Cat/Models/instruments/tnv-15/tnv-15-cell.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  -0.216 </x-m>
+   <y-m>  0.053 </y-m>
+   <z-m>  -0.152 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+ <path>Aircraft/Flying-Cat/Models/instruments/lamps/green-temp-cell.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  -0.196 </x-m>
+   <y-m>  0.045 </y-m>
+   <z-m>  -0.112 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+ <path>Aircraft/Flying-Cat/Models/instruments/lamps/orange-temp-cell.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  -0.216 </x-m>
+   <y-m>  0.045 </y-m>
+   <z-m>  -0.112 </z-m>
+  </offsets>
+ </model>
+ 
+ <model>
+ <path>Aircraft/Flying-Cat/Models/instruments/lamps/red-temp-cell.xml</path>
+  <offsets>
+   <heading-deg>90</heading-deg>
+   <x-m>  -0.236 </x-m>
+   <y-m>  0.045 </y-m>
+   <z-m>  -0.112 </z-m>
+  </offsets>
+ </model> 
+ 
+</PropertyList>

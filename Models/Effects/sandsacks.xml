@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<PropertyList>
+  
+  <path>sandsacks2.ac</path>
+  
+  <animation>
+    <type>select</type>	  
+    <condition>
+      <equals>
+        <property>sim/multiplay/generic/float[7]</property>
+        <value>2</value>
+      </equals>
+    </condition>
+  </animation>
+  
+  <animation>
+    <type>rotate</type>        
+    <property>sim/multiplay/generic/float[5]</property>
+    <factor>1</factor>
+    <interpolation>
+      
+      <entry><ind> 0.13 </ind><dep> -90.2 </dep></entry>
+      <entry><ind> 10.0 </ind><dep> -83.3 </dep></entry>
+      <entry><ind> 25.7 </ind><dep> -72.0 </dep></entry>
+      <entry><ind> 41.0 </ind><dep> -59.9 </dep></entry>
+      <entry><ind> 58.42 </ind><dep> -44.5 </dep></entry>
+      <entry><ind> 70.2 </ind><dep> -30.0 </dep></entry>
+      <entry><ind> 74.5 </ind><dep> -25.0 </dep></entry>
+      <entry><ind> 77.35 </ind><dep> -22.0 </dep></entry>
+      <entry><ind> 81.5 </ind><dep> 0 </dep></entry>
+      
+    </interpolation>
+    <center>
+      <x-m>0.0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+    </animation>
+ 
+    <animation>
+    <type>rotate</type>        
+    <property>sim/multiplay/generic/float[6]</property>
+    <factor>-1</factor>
+    <center>
+      <x-m>0.0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>0</y>
+      <z>1</z>
+    </axis>
+  </animation> 
+  
+  <animation>
+    <type>rotate</type>        
+    <property>orientation/roll-deg</property>
+    <factor>1</factor>
+    <center>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </center>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation> 
+  
+  <animation>
+    <type>rotate</type>        
+    <property>orientation/pitch-deg</property>
+    <factor>1</factor>
+    <center>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+    </animation>
+    
+  </PropertyList>
