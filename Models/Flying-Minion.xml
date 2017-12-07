@@ -14,6 +14,124 @@
        <path>Aircraft/Flying-Cat/Sounds/cat-sounds.xml</path>
  </sound> 
 
+<model>
+   <name>man</name>
+   <path>Aircraft/Flying-Cat/Models/passenger-man/man52.ac</path>
+   <condition>
+     <and>
+       <greater-than>
+	 <property>sim/multiplay/generic/float[9]</property>
+	 <value>100</value>
+       </greater-than>
+       <not-equals>
+	 <property>/sim/current-view/view-number</property>
+	 <value>0</value>
+       </not-equals>
+       <not-equals>
+	 <property>/sim/current-view/view-number</property>
+	 <value>8</value>
+       </not-equals>
+     </and>
+   </condition>
+   <offsets>
+     <x-m> 0.04 </x-m>
+     <y-m> 0.0 </y-m>
+     <z-m> 0.0 </z-m>
+     <roll-deg> 0.0 </roll-deg>
+     <heading-deg>180</heading-deg>
+   </offsets>
+ </model>
+ 
+  <model>
+  <name>rochelle</name>
+  <path>Aircraft/Flying-Cat/Models/rochelle/Rochelle1.ac</path>
+  <condition>
+      <greater-than>
+	<property>sim/multiplay/generic/float[9]</property>
+	<value>200</value>
+      </greater-than>
+    </condition>
+  <offsets>
+   <x-m> -0.10 </x-m>
+   <y-m> -0.37 </y-m>
+   <z-m> 0.0 </z-m>
+   <roll-deg> 0.0 </roll-deg>
+   <heading-deg>-90</heading-deg>
+  </offsets>
+ </model>
+ 
+  <model>
+  <name>man</name>
+  <path>Aircraft/Flying-Cat/Models/passenger-man/man62.ac</path>
+  <condition>
+      <greater-than>
+	<property>sim/multiplay/generic/float[9]</property>
+	<value>300</value>
+      </greater-than>
+    </condition>
+  <offsets>
+   <x-m> 0.60 </x-m>
+   <y-m> 0.28 </y-m>
+   <z-m> 0.0 </z-m>
+   <roll-deg> 0.0 </roll-deg>
+   <heading-deg>90</heading-deg>
+  </offsets>
+ </model> 
+ 
+  <model>
+  <name>rochelle</name>
+  <path>Aircraft/Flying-Cat/Models/rochelle/Rochelle2.ac</path>
+  <condition>
+      <greater-than>
+	<property>sim/multiplay/generic/float[9]</property>
+	<value>400</value>
+      </greater-than>
+    </condition>
+  <offsets>
+   <x-m> 0.10 </x-m>
+   <y-m> 0.35 </y-m>
+   <z-m> 0.0 </z-m>
+   <roll-deg> 0.0 </roll-deg>
+   <heading-deg>90</heading-deg>
+  </offsets>
+ </model>
+ 
+<model>
+  <name>man</name>
+  <path>Aircraft/Flying-Cat/Models/passenger-man/man32.ac</path>
+  <condition>
+      <greater-than>
+	<property>sim/multiplay/generic/float[9]</property>
+	<value>500</value>
+      </greater-than>
+    </condition>
+  <offsets>
+   <x-m> 0.80 </x-m>
+   <y-m> -0.20 </y-m>
+   <z-m> 0.0 </z-m>
+   <roll-deg> 0.0 </roll-deg>
+   <heading-deg>-30</heading-deg>
+  </offsets>
+ </model>
+  
+ <model>
+  <name>rochelle</name>
+  <path>Aircraft/Flying-Cat/Models/rochelle/Rochelle4.ac</path>
+  <condition>
+      <greater-than>
+	<property>sim/multiplay/generic/float[9]</property>
+	<value>590</value>
+      </greater-than>
+    </condition>
+  <offsets>
+   <x-m> 0.35 </x-m>
+   <y-m> -0.33 </y-m>
+   <z-m> 0.0 </z-m>
+   <roll-deg> 0.0 </roll-deg>
+   <heading-deg>-90</heading-deg>
+  </offsets>
+ </model>
+ 
  <model>
   <name>skis</name>
   <path>Aircraft/Flying-Cat/Models/skis.ac</path>

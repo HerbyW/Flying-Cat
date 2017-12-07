@@ -130,6 +130,7 @@ This file is licensed under the GPL license version 2 or later.
 	<float type="float" n="6" alias="/instrumentation/drift"/>
 	<float type="float" n="7" alias="/fdm/jsbsim/animation/anchor-sacks"> 1.0 </float>
 	<float type="float" n="8" alias="/instrumentation/gps/indicated-ground-speed-kt"/>
+	<float type="float" n="9" alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[1]"/>
 	
 	<string  alias="/sim/multiplay/callsign"/>
 	</generic>
