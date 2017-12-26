@@ -1,0 +1,28 @@
+AC3Db
+MATERIAL "DefaultWhite" rgb 1.0000 1.0000 1.0000  amb 0.2000 0.2000 0.2000  emis 0.0000 0.0000 0.0000  spec 0.5000 0.5000 0.5000  shi 10 trans 0.0000
+MATERIAL "Grey" rgb 0.7000 0.7000 0.7000  amb 0.7000 0.7000 0.7000  emis 0.0000 0.0000 0.0000  spec 1.0000 1.0000 1.0000  shi 31 trans 0.0000
+OBJECT world
+name "Blender_exporter_v2.11__windkreis5.ac"
+kids 1
+OBJECT poly
+name "Grey"
+data 4
+Grey
+loc 0.0000000 -0.3583330 -0.0476825
+crease 35.0
+texture "windkreis2.png"
+texrep 1 1
+numvert 4
+0.29845 -0.15677 -0.00000
+-0.29845 -0.15677 0.00000
+0.29845 0.15677 -0.00000
+-0.29845 0.15677 0.00000
+numsurf 1
+SURF 0X0
+mat 1
+refs 4
+0 0.000000 0.000000
+1 1.000000 0.000000
+3 1.000000 1.000000
+2 0.000000 1.000000
+kids 0

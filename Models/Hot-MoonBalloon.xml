@@ -268,11 +268,11 @@
  
  <model>
   <name>wind</name>
-  <path>Aircraft/Flying-Cat/Models/windkreis2.ac</path>
+  <path>Aircraft/Flying-Cat/Models/windkreis5.ac</path>
   <offsets>
    <x-m> -1.032 </x-m>
    <y-m>  -0.00 </y-m>
-   <z-m>  0.943 </z-m>
+   <z-m>  0.956 </z-m>
    <roll-deg> 70.0 </roll-deg>
    <heading-deg>270</heading-deg>
   </offsets>
