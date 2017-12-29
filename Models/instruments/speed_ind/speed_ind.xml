@@ -43,9 +43,12 @@
        <property>velocities/groundspeed-kt</property>
          
    <interpolation>
-      <entry><ind>   0.00 </ind><dep>   6 </dep></entry>
-      <entry><ind> 100</ind><dep>  65</dep></entry>
-      <entry><ind> 405.00 </ind><dep> 354 </dep></entry>
+      <entry><ind> 0.0</ind><dep>   -3 </dep></entry>
+      <entry><ind>  27</ind><dep>  5</dep></entry>
+      <entry><ind>  54</ind><dep>  23</dep></entry>
+      <entry><ind> 108</ind><dep>  75</dep></entry>
+      <entry><ind> 161</ind><dep>  127</dep></entry>
+      <entry><ind> 405.00 </ind><dep> 360 </dep></entry>
     </interpolation>
   
   <center>
