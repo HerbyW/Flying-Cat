@@ -1,4 +1,4 @@
-# Flying-Cat
+Flying-Cat
 
 for Flightgear Flightsimulator by Herbert Wagner 2016-2018
 
