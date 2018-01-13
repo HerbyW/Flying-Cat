@@ -105,10 +105,16 @@
       <mode>once</mode>
       <path>Aircraft/Flying-Cat/Sounds/omi_1.wav</path>
       <condition>
+	<and>
         <less-than>
           <property>/position/ground-altitude</property>
           <property>/instrumentation/altimeter/decision-height</property>      
         </less-than>
+	<equals>
+	    <property>sim/multiplay/generic/int[8]</property>
+	    <value>1</value>
+	  </equals>
+	</and>
       </condition>
       <volume>
         <min>0.9</min>

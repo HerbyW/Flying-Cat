@@ -5,6 +5,20 @@
 ##  This file is licensed under the GPL license v2 or later.
 ##
 ###############################################################################
+
+setprop("/sim/signals/fdm-ready", 0);
+
+
+var fdmready = maketimer(3, func {
+  
+  if (getprop ("/sim/time/elapsed-sec") > 10 )  
+  setprop("/sim/signals/fdm-ready", 1); 
+    
+});
+
+fdmready.start();
+
+################################################################################
 # For solar radiation heating.
 setlistener("/sim/time/sun-angle-rad", func {
     setprop("/fdm/jsbsim/environment/sun-angle-rad", getprop("/sim/time/sun-angle-rad"));

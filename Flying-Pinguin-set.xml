@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!--
-Flying-RedBalloon Balloon model for FlightGear.
+Flying-Pinguin Hot Air Balloon model for FlightGear.
 
-Copyright (C) 2016 Herbert Wagner  
+Copyright (C) 2018 Herbert Wagner  
 This file is licensed under the GPL license version 2 or later.
 -->
 <PropertyList>
@@ -18,7 +18,7 @@ This file is licensed under the GPL license version 2 or later.
   
   <sim>
     
-    <description>Flying-RedBalloon Hot Air Balloon</description>
+    <description>Flying-Pinguin Hot Air Balloon</description>
     <author>Herbert Wagner</author>
     <aircraft-version>v 3.2</aircraft-version>
     
@@ -44,7 +44,7 @@ This file is licensed under the GPL license version 2 or later.
     </startup>
     
     <model>
-      <path>Aircraft/Flying-Cat/Models/RedSportBalloon.xml</path>
+      <path>Aircraft/Flying-Cat/Models/Flying-Pinguin.xml</path>
       <flares type="float">0</flares>
     </model>
     
@@ -143,7 +143,7 @@ This file is licensed under the GPL license version 2 or later.
       <menubar>
 	<default>
 	  <menu n="100">
-	    <label>Flying RedBalloon</label>
+	    <label>Flying Pinguin</label>
 	    <item>
 	      <label>About</label>
 	      <binding>
@@ -155,7 +155,9 @@ This file is licensed under the GPL license version 2 or later.
 	</default>
       </menubar>
       
+      
       <help include="Systems/help.xml"/>
+      
       
       <import>
 	<path>Huds/default.xml</path>
@@ -384,5 +386,4 @@ This file is licensed under the GPL license version 2 or later.
 	      </keyboard>
 	    </input>
 	    
-	    </PropertyList>
-	    
+</PropertyList>
