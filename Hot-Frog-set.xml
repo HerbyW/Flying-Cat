@@ -21,6 +21,7 @@ This file is licensed under the GPL license version 2 or later.
     <description>Flying-Frog Hot Air Balloon</description>
     <author>Herbert Wagner</author>
     <aircraft-version>v 3.2</aircraft-version>
+    <variant-of>Flying-Cat</variant-of>
     
     <status type="string">advanced production</status>
     <rating>
